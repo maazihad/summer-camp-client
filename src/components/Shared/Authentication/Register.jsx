@@ -5,15 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { toast } from "react-hot-toast";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
 const Register = () => {
-
+   const [axiosSecure] = useAxiosSecure();
    const { createUser, updateUserProfile } = useContext(AuthContext);
    const navigate = useNavigate();
-   // ========================react hook form
    const { register, handleSubmit, reset, formState: { errors } } = useForm();
-
    const onSubmit = data => {
       console.log(data);
       createUser(data.email, data.password)
@@ -22,23 +21,19 @@ const Register = () => {
             console.log(loggedUser);
             updateUserProfile(data.name, data.photoURL)
                .then(() => {
-                  // here is the work user saved in database
-                  const saveUser = { name: data.name, email: data.email };
-                  fetch('https://bistro-boss-server-maazihad.vercel.app/users', {
-                     method: 'POST',
-                     headers: {
-                        'content-type': 'application/json'
-                     },
-                     body: JSON.stringify(saveUser)
-                  })
-                     .then(res => res.json())
+                  const saveUser = {
+                     name: data.name,
+                     email: data.email
+                  };
+                  axiosSecure.post('/users', saveUser)
                      .then(data => {
-                        if (data.insertedId) {
+                        console.log('after posting new menu item', data.data);
+                        if (data.data.insertedId) {
                            reset();
                            Swal.fire({
                               position: 'center',
                               icon: 'success',
-                              title: 'User created successfully!!!!',
+                              title: `-------TODO--------- successfully`,
                               showConfirmButton: false,
                               timer: 1500
                            });
@@ -78,23 +73,15 @@ const Register = () => {
                         <label className="label">
                            <span className="label-text">Name</span>
                         </label>
-                        <input {...register("name", { required: true })} type="text" name="name" placeholder="Name" className="input input-bordered" />
+                        <input {...register("name", { required: true })} type="text" name="name" placeholder="Enter your Name" className="input input-bordered" />
                         {errors.name && <span className="text-red-700 text-md">Name field is required!</span>}
-                     </div>
-
-                     <div className="form-control">
-                        <label className="label">
-                           <span className="label-text">Photo URL</span>
-                        </label>
-                        <input {...register("photoUrl", { required: true })} type="url" name="photoUrl" placeholder="Photo URL" className="input input-bordered" />
-                        {errors.photoUrl && <span className="text-red-700 text-md">Photo url is required!</span>}
                      </div>
 
                      <div className="form-control">
                         <label className="label">
                            <span className="label-text">Email</span>
                         </label>
-                        <input {...register("email", { required: true })} type="email" name="email" placeholder="email" className="input input-bordered" />
+                        <input {...register("email", { required: true })} type="email" name="email" placeholder="Enter a valid email" className="input input-bordered" />
                         {errors.email && <span className="text-red-700 text-md">Email field is required!</span>}
                      </div>
 
@@ -116,7 +103,37 @@ const Register = () => {
                         {errors.password?.type === 'maxLength' && <p role="alert">Password must less than 20 characters long.</p>}
 
                         {errors.password?.type === 'pattern' && <p role="alert">Minimum six characters, at least one uppercase letter, one lowercase letter, one number and one special character.</p>}
+                     </div>
 
+
+                     <div className="form-control">
+                        <label className="label">
+                           <span className="label-text">Photo URL</span>
+                        </label>
+                        <input {...register("photoUrl", { required: true })} type="url" name="photoUrl" placeholder="Photo URL" className="input input-bordered" />
+                        {errors.photoUrl && <span className="text-red-700 text-md">Photo url is required!</span>}
+                     </div>
+
+
+
+                     <div className="form-control">
+                        <label className="label">
+                           <span className="label-text">Password</span>
+                        </label>
+                        <input {...register("password", {
+                           required: true,
+                           minLength: 6,
+                           maxLength: 20,
+                           pattern: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/
+                        })} type="password" name="password" placeholder="password" className="input input-bordered" />
+
+                        {errors.password?.type === 'required' && <span className="text-red-700 text-md">Password is required!</span>}
+
+                        {errors.password?.type === 'minLength' && <p role="alert">Password must be 6 characters long.</p>}
+
+                        {errors.password?.type === 'maxLength' && <p role="alert">Password must less than 20 characters long.</p>}
+
+                        {errors.password?.type === 'pattern' && <p role="alert">Minimum six characters, at least one uppercase letter, one lowercase letter, one number and one special character.</p>}
                      </div>
 
                      <div className="form-control mt-6">
