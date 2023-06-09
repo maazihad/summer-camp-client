@@ -1,6 +1,6 @@
 import { Link, useRouteError } from "react-router-dom";
 import { FiArrowLeftCircle } from 'react-icons/fi';
-import { error404 } from "../../assets/404/404.json";
+import errorPage from "../../assets/errorPage/errorPage.json";
 import Lottie from "lottie-react";
 
 const ErrorPage = () => {
@@ -9,7 +9,7 @@ const ErrorPage = () => {
       <section className='bg-blue-200 flex items-center h-screen'>
          <div className='container flex flex-col items-center justify-center px-5 mx-auto my-8'>
             <div className='max-w-md text-center'>
-               <Lottie animationData={error404} />
+               <Lottie animationData={errorPage} />
                <p className='text-blue-500 font-semibold md:text-3xl mb-8'>
                   Message : {error?.message}
                </p>

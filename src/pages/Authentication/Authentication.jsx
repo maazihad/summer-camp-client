@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SocialLogin from "../../components/Shared/Authentication/SocialLogin";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Authentication = () => {
    const [isNew, setIsNew] = useState(false);
