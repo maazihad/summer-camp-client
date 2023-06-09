@@ -43,15 +43,15 @@ const SocialLogin = () => {
 
 
    return (
-      <div className="lg:w-2/3 bg-red-200">
+      <div className="lg:w-2/3 lobster">
          <button
             onClick={handleGoogleSignIn}
-            className="lg:w-2/3 font-bold shadow-sm py-3 bg-red-200 hover:bg-red-300 text-amber-900 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+            className="w-full font-semibold shadow-sm py-3 bg-red-200 hover:bg-red-300 text-amber-900 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
          >
             <div className="bg-white p-2 rounded-full">
                <FcGoogle></FcGoogle>
             </div>
-            <span className="ml-4">Login with Google</span>
+            <span className="ml-4">Register with Google</span>
          </button>
       </div>
    );
