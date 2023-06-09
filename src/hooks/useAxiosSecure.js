@@ -13,6 +13,7 @@ const useAxiosSecure = () => {
    const navigate = useNavigate();
 
    useEffect(() => {
+
       //---------->>>request
       axiosSecure.interceptors.request.use((config) => {
          const token = localStorage.getItem('access-token');
@@ -21,6 +22,7 @@ const useAxiosSecure = () => {
          }
          return config;
       });
+
       //<<<-------response
       axiosSecure.interceptors.request.use(
          (response) => response, async (error) => {
@@ -31,7 +33,7 @@ const useAxiosSecure = () => {
             return Promise.reject(error);
          }
       );
-   }, [axiosSecure, logOut, navigate]);
+   }, [logOut, navigate]);
 
    return [axiosSecure];
 };
