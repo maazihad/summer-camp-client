@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+   font-family: 'Lobster', cursive;
+}
+
 .gamjaFlower {
    font-family: 'Gamja Flower', cursive;
 }
