@@ -7,52 +7,27 @@ import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
-
-
-   const { signIn, updateUserProfile } = useAuth();
+   const { signIn } = useAuth();
    const navigate = useNavigate();
    const location = useLocation();
    const from = location.state?.from?.pathname || "/";
 
    const onSubmit = data => {
       console.log(data);
-      signIn(data.email, data.password)
+      signIn(email, password)
          .then(result => {
-            const loggedUser = result.user;
+            const loggedUser = result?.user;
             console.log(loggedUser);
-            updateUserProfile(data.name, data.photoURL)
-               .then(() => {
-                  // here is the work user saved in database
-                  const saveUser = { name: data.name, email: data.email };
-                  fetch('https://bistro-boss-server-maazihad.vercel.app/users', {
-                     method: 'POST',
-                     headers: {
-                        'content-type': 'application/json'
-                     },
-                     body: JSON.stringify(saveUser)
-                  })
-                     .then(res => res.json())
-                     .then(data => {
-                        if (data.insertedId) {
-                           reset();
-                           Swal.fire({
-                              position: 'center',
-                              icon: 'success',
-                              title: 'User created successfully!!!!',
-                              showConfirmButton: false,
-                              timer: 1500
-                           });
-                           navigate("/");
-                        }
-                     });
-
-               })
-               .catch((error) => {
-                  toast(error.message);
-               });
+            Swal.fire({
+               position: 'center',
+               icon: 'success',
+               title: `Hello! ${result?.user?.email}! Welcome Back!`,
+               showConfirmButton: false,
+               timer: 1500
+            });
+            navigate(from, { replace: true });
          })
          .catch(error => {
-            console.log(error);
             toast(error.message);
          });
    };
