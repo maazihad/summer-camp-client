@@ -1,4 +1,4 @@
-const getGreetingTime = (currentTime) => {
+const greetings = (currentTime) => {
    if (!currentTime || !currentTime.isValid()) {
       return "Hello";
    }
@@ -18,4 +18,4 @@ const getGreetingTime = (currentTime) => {
    return "Good morning";
 };
 
-export default getGreetingTime;
+export default greetings;

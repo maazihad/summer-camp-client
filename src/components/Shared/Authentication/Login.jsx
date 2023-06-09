@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import greetings from "../../../api/greetings";
 
 
 const Login = () => {
@@ -11,6 +12,7 @@ const Login = () => {
    const navigate = useNavigate();
    const location = useLocation();
    const from = location.state?.from?.pathname || "/";
+   const greeting = greetings();
 
    const onSubmit = data => {
       console.log(data);
@@ -21,7 +23,7 @@ const Login = () => {
             Swal.fire({
                position: 'center',
                icon: 'success',
-               title: `Hello! ${result?.user?.email}! Welcome Back!`,
+               title: `${greeting}! ${result?.user?.email}! Welcome Back!`,
                showConfirmButton: false,
                timer: 1500
             });
