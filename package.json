@@ -28,7 +28,8 @@
     "react-spinners": "^0.13.8",
     "react-switch": "^7.0.0",
     "sort-by": "^1.2.0",
-    "sweetalert2": "^11.7.11"
+    "sweetalert2": "^11.7.11",
+    "swiper": "^9.3.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

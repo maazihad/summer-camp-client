@@ -1,6 +1,9 @@
 
 import { useState } from "react";
 import Switch from "react-switch";
+import Banner from "../../components/Home/Banner";
+import Popular from "../../components/Home/Popular";
+import Instructors from "../../components/Home/Instructors";
 
 
 const Home = () => {
@@ -29,7 +32,9 @@ const Home = () => {
             />
          </label>
          <div className={checked ? "bg-neutral-900 text-white" : "bg-red-100 text-black"}>
-            <h2>Hello</h2>
+            <Banner />
+            <Popular />
+            <Instructors />
          </div>
       </div>
    );

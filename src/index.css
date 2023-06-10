@@ -1,11 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gamja+Flower&family=Lobster&family=Schoolbell&display=swap');
 @tailwind base;
-@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Lobster&family=Schoolbell&display=swap');
-@tailwind components;
-@tailwind utilities;
-
-* {
-   font-family: 'Lobster', cursive;
-}
 
 .gamjaFlower {
    font-family: 'Gamja Flower', cursive;
@@ -15,6 +9,14 @@
    font-family: 'Lobster', cursive;
 }
 
-.Schoolbell {
+.schoolbell {
    font-family: 'Schoolbell', cursive;
 }
+
+.abril {
+   font-family: 'Abril Fatface', cursive;
+}
+
+@tailwind components;
+
+@tailwind utilities;
