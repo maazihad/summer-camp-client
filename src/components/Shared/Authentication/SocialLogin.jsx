@@ -1,10 +1,10 @@
 import { toast } from "react-hot-toast";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 
-const SocialLogin = () => {
-
+const SocialLogin = ({ newUser }) => {
    const { signInWithGoogle } = useAuth();
    const navigate = useNavigate();
    const location = useLocation();
@@ -51,7 +51,9 @@ const SocialLogin = () => {
             <div className="bg-white p-2 rounded-full">
                <FcGoogle></FcGoogle>
             </div>
-            <span className="ml-4">Register with Google</span>
+            {
+               newUser ? <span className="ml-4">Sign up with Google</span> : <span className="ml-4">Login with Google</span>
+            }
          </button>
       </div>
    );

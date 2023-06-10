@@ -32,7 +32,7 @@ const SignUp = () => {
                            Swal.fire({
                               position: 'center',
                               icon: 'success',
-                              title: `-------TODO--------- successfully`,
+                              title: `${saveUser.name}, successfully singing up.`,
                               showConfirmButton: false,
                               timer: 1500
                            });
@@ -100,7 +100,7 @@ const SignUp = () => {
             </div>
 
             <div className="form-control mt-6">
-               <input className="btn text-red-900 btn-outline transition-all font-bold duration-500 rounded-none hover:bg-red-300 hover:border-transparent hover:text-red-900 border-red-900 capitalize ease-in-out" type="submit" value="Sign In" />
+               <input className="btn text-red-900 btn-outline transition-all font-bold duration-500 rounded-none hover:bg-red-300 hover:border-transparent hover:text-red-900 border-red-900 capitalize ease-in-out" type="submit" value="Sign Up" />
             </div>
          </form>
       </div>

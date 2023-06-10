@@ -25,7 +25,7 @@ const SignIn = () => {
             Swal.fire({
                position: 'center',
                icon: 'success',
-               title: `${greeting}! ${result?.user?.email}! Welcome Back!`,
+               title: `${greeting}! ${result?.user?.displayName}! Welcome Back!`,
                showConfirmButton: false,
                timer: 1500
             });

@@ -28,7 +28,7 @@ const Home = () => {
                width={48}
             />
          </label>
-         <div className={checked ? "bg-black text-white" : "bg-white text-black"}>
+         <div className={checked ? "bg-neutral-900 text-white" : "bg-red-100 text-black"}>
             <h2>Hello</h2>
          </div>
       </div>

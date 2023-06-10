@@ -41,12 +41,12 @@ const Authentication = () => {
                                     </span>Please Sign in.
                                  </div> :
                                  <div className="hover:text-red-900 border-red-400">
-                                    <span className="font-bold">New Student? </span> please sign up.
+                                    <span className="font-bold">New Student? </span> please register.
                                  </div>
                            }
                         </div>
                      </div>
-                     <SocialLogin />
+                     <SocialLogin newUser={newUser} />
                   </div>
                </div>
 

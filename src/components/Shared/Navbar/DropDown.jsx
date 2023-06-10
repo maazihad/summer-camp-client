@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
-const DropDown = () => {
-   const { user, logOut, setRole } = useAuth();
+const DropDown = ({ handleLogOut }) => {
+   const { user } = useAuth();
    const [isOpen, setIsOpen] = useState(false);
 
    // const navigate = useNavigate();
@@ -50,10 +50,10 @@ const DropDown = () => {
             } */}
             <div
                onClick={() => setIsOpen(!isOpen)}
-               className='p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
+               className='p-2 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
             >
                <AiOutlineMenu />
-               <div className='hidden md:block'>
+               <div className=''>
                   <RxAvatar size={30} />
                </div>
             </div>
@@ -68,6 +68,18 @@ const DropDown = () => {
                      >
                         Home
                      </Link>
+                     <Link
+                        to='/'
+                        className='block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                     >
+                        Instructors
+                     </Link>
+                     <Link
+                        to='/'
+                        className='block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                     >
+                        Classes
+                     </Link>
                      {user ? (
                         <>
                            <Link
@@ -76,7 +88,7 @@ const DropDown = () => {
                            >
                               Dashboard
                            </Link>
-                           <div
+                           {/* <div
                               onClick={() => {
                                  setRole(null);
                                  logOut();
@@ -84,22 +96,26 @@ const DropDown = () => {
                               className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
                            >
                               Logout
-                           </div>
+                           </div> */}
                         </>
                      ) : (
                         <>
-                           <Link
-                              to='/login'
-                              className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                           >
-                              Login
-                           </Link>
-                           <Link
-                              to='/signup'
-                              className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                           >
-                              Sign Up
-                           </Link>
+
+                           <button onClick={handleLogOut}>Logout</button>
+
+                           {/* {
+                              user ?
+                                 
+                                 :
+                                 <Link
+                                    to='/authentication'
+                                    className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                 >
+                                    Login
+                                 </Link>
+                           } */}
+
+
                         </>
                      )}
                   </div>
