@@ -21,7 +21,7 @@ const Authentication = () => {
 
 
                <div className="mt-5 flex flex-col items-start">
-                  <h1 className="text-2xl Schoolbell font mt-5 xl:text-3xl text-red-900 font-extrabold">
+                  <h1 className="text-2xl gamjaFlower font mt-5 xl:text-3xl text-red-900 font-extrabold">
                      Welcome, <br /> <span className="text-purple-700 text-4xl">Rausu Photography</span> <br /> <span className="text-4xl">Summer Camp School</span>
                   </h1>
 
@@ -31,7 +31,7 @@ const Authentication = () => {
                         {newUser ? <SignUp /> : <SignIn />}
                         <div
                            onClick={() => setNewUser(!newUser)}
-                           className="cursor-pointer lobster px-2 lg:w-2/3  text-center lg:inline-block text-sm text-gray-600 tracking-wide font-medium"
+                           className="cursor-pointer schoolbell px-2 lg:w-2/3  text-center lg:inline-block text-sm text-gray-600 tracking-wide font-medium"
                         >
                            {
                               newUser ?

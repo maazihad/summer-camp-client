@@ -1,59 +1,75 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import { saveUser } from "../../api/auth.js";
+import Swal from "sweetalert2";
 
-
+const imageHostingToken = import.meta.env.VITE_Image_Upload_token;
 const SignUp = () => {
-   const [axiosSecure] = useAxiosSecure();
-   const { createUser, updateUserProfile } = useAuth();
    const navigate = useNavigate();
+   const location = useLocation();
+   const from = location.state?.from?.pathName || '/';
+   const url = `https://api.imgbb.com/1/upload?key=${imageHostingToken}`;
+
+   const { createUser, updateUserProfile, setLoading, } = useAuth();
+
    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
    const onSubmit = data => {
       console.log(data);
-      createUser(data.email, data.password)
-         .then(result => {
-            const loggedUser = result.user;
-            console.log(loggedUser);
-            updateUserProfile(data.name, data.photoURL)
-               .then(() => {
-                  const saveUser = {
-                     name: data.name,
-                     email: data.email
-                  };
-                  axiosSecure.post('/users', saveUser)
-                     .then(data => {
-                        console.log('after posting new menu item', data.data);
-                        if (data.data.insertedId) {
-                           reset();
+      const formData = new FormData();
+      formData.append('image', data.image[0]);
+
+      fetch(url, {
+         method: "POST",
+         body: formData,
+      })
+         .then(res => res.json())
+         .then(imgRes => {
+            if (imgRes.success) {
+               console.log(imgRes.data.display_url);
+               reset();
+               const imgURL = imgRes.data.display_url;
+               createUser(data.email, data.password)
+                  .then(result => {
+                     console.log(result.user);
+                     updateUserProfile(data.name, imgURL)
+                        .then(() => {
                            Swal.fire({
                               position: 'center',
                               icon: 'success',
-                              title: `${saveUser.name}, successfully singing up.`,
+                              title: 'Welcome!!! to "RAOSU" Photography Summer camp school.',
                               showConfirmButton: false,
                               timer: 1500
                            });
-                           navigate("/");
-                        }
-                     });
-
-               })
-               .catch((error) => {
-                  toast(error.message);
-               });
+                           saveUser(result.user);
+                           navigate(from, { replace: true });
+                        })
+                        .catch(error => {
+                           toast(error.message);
+                           console.log(error.message);
+                           setLoading(false);
+                        });
+                     navigate(from, { replace: true });
+                  })
+                  .catch(error => {
+                     toast(error.message);
+                     console.log(error.message);
+                     setLoading(false);
+                  });
+            }
          })
          .catch(error => {
             console.log(error);
             toast(error.message);
          });
+      return;
    };
-
 
    return (
       <div className="lg:w-2/3">
-         <form onSubmit={handleSubmit(onSubmit)} className="pb-3 lobster">
+         <form onSubmit={handleSubmit(onSubmit)} className="pb-3 schoolbell">
             <div className="form-control">
                <label className="label">
                   <span className="label-text -ml-1">Name</span>
@@ -90,16 +106,26 @@ const SignUp = () => {
                {errors.password?.type === 'pattern' && <p role="alert">Minimum six characters, at least one uppercase letter, one lowercase letter, one number and one special character.</p>}
             </div>
 
-            <div className="form-control">
+            <div className="form-control mt-3">
+               <label htmlFor="image" className="block label mb-2 text-sm">
+                  <span className="label-text -ml-1 ">Upload Your Image</span>
+               </label>
+               <input {...register("image", { required: true })}
+                  type="file" name="image" accept="image/*"
+                  className="file-input border-red-900 rounded-none bg-red-100"
+               />
+            </div>
+
+            {/* <div className="form-control">
                <label className="label -ml-1">
                   <span className="label-text">Photo URL</span>
                </label>
                <input {...register("photoUrl", { required: true })} type="url" name="photoUrl" placeholder="Photo URL" className="input border-red-900 rounded-none bg-red-100" />
                {errors.photoUrl && <span className="text-red-700 text-md">Photo url is required!</span>}
-            </div>
+            </div> */}
 
             <div className="form-control mt-6">
-               <input className="btn text-red-900 btn-outline transition-all font-bold duration-500 rounded-none hover:bg-red-300 hover:border-transparent hover:text-red-900 border-red-900 capitalize ease-in-out" type="submit" value="Sign Up" />
+               <input className="btn text-red-900 transition-all font-bold duration-500 btn-outline rounded-none hover:bg-red-300 hover:border-transparent hover:text-red-900 border-red-900 capitalize ease-in-out" type="submit" value="Sign Up" />
             </div>
          </form>
       </div>

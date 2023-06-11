@@ -37,7 +37,7 @@ const SignIn = () => {
 
    return (
       <div className="lg:w-2/3">
-         <form onSubmit={handleSubmit(onSubmit)} className="pb-3 lobster">
+         <form onSubmit={handleSubmit(onSubmit)} className="pb-3 schoolbell">
             <div className="form-control">
                <label className="label -ml-1">
                   <span className="label-text ">Email</span>

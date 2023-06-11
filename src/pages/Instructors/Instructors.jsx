@@ -1,101 +1,48 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import { getAllInstructors } from "../../api/get";
+import Spinner from "../../components/Shared/Spinner/Spinner";
+import Wrapper from "../../components/Shared/Wrapper/Wrapper";
 import { Helmet } from "react-helmet-async";
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
-import Swal from "sweetalert2";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import InstructorCard from "./InstructorCard";
 
 const Instructors = () => {
-   const [axiosSecure] = useAxiosSecure();
-   const { data: allUsers = [], refetch } = useQuery(['AllUsers'], async () => {
-      const res = await axiosSecure.get("/allUsers");
-      return res.data;
-   });
-   const handleMakeAdmin = user => {
-      console.log(user);
-      fetch(`/allUsers/admin/${user._id}`, {
-         method: "PATCH",
-      })
-         .then(res => res.json())
-         .then(data => {
-            console.log(data);
-            if (data.modifiedCount > 0) {
-               refetch();
-               Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: `${user.name} is now admin`,
-                  showConfirmButton: false,
-                  timer: 1500
-               });
-            }
-         });
-   };
 
+   const [instructor, setInstructor] = useState([]);
+   const { loading, setLoading } = useAuth();
 
-   const handleDelete = user => {
-      axiosSecure.delete(`/users/admin/${user._id}`)
+   useEffect(() => {
+      setLoading(true);
+      getAllInstructors()
          .then(data => {
-            if (data.data.deletedCount > 0) {
-               refetch();
-               Swal.fire(
-                  'Deleted!',
-                  `${user.name} is deleted from admin`,
-                  'success'
-               );
-            }
+            setInstructor(data);
+            setLoading(false);
+         })
+         .catch((error) => {
+            console.log(error);
          });
-   };
+   }, [setLoading]);
+   if (loading) {
+      return <Spinner />;
+   }
 
    return (
-      <div>
-
-         {/* Helmet */}
+      <>
          <Helmet>
-            <title>Instructors || RAOSU Summer Camp Photography School</title>
+            <title>Instructors || Raosu Summer Camp Photography School</title>
          </Helmet>
+         <Wrapper>
+            <div className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
+               {
+                  instructor.map((inst) => <InstructorCard
+                     key={inst._id}
+                     instructor={inst}
+                  ></InstructorCard>)
+               }
+            </div>
+         </Wrapper>
+      </>
 
-         <h2 className="text-2xl font-bold text-center text-red-900">Total users : {allUsers.length}</h2>
-
-         <div className="overflow-x-auto">
-            <table className="table table-zebra w-full">
-               {/* head */}
-               <thead>
-                  <tr>
-                     <th>#</th>
-                     <th>Name</th>
-                     <th>Email</th>
-                     <th>Role</th>
-                     <th>Action</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  {
-                     allUsers.map((user, index) => <tr
-                        key={user._id}
-                     >
-                        <th>{index + 1}</th>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>
-                           {
-                              user.role === 'admin' ? <button className="btn btn-xs">admin</button> : <button
-                                 onClick={() => handleMakeAdmin(user)}
-                                 className="btn btn-ghost bg-black btn-xs"><FaUsers className="text-lg text-white" /></button>
-                           }
-                        </td>
-                        <td>
-                           <button onClick={() => handleDelete(user)} className="btn btn-ghost bg-red-500  btn-xs">
-                              <FaTrashAlt className="text-lg text-white" />
-                           </button>
-                        </td>
-                     </tr>)
-                  }
-
-
-               </tbody>
-            </table>
-         </div>
-      </div>
    );
 };
 

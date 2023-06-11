@@ -36,8 +36,6 @@ const Home = () => {
             <Banner />
             <Popular />
             <Instructors />
-            <h2 className="text-5xl mb-6  mt-12 text-red-900 font-bold text-center abril">Students best Clicking Shot</h2>
-            <p className="text-center gamjaFlower text-red-800 font-bold mb-5 text-2xl">Explore the World Through Your Lens</p>
             <Album />
          </div>
       </div>

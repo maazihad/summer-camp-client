@@ -5,17 +5,29 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useEffect, useState } from "react";
 import { BsFillArrowDownCircleFill } from 'react-icons/bs';
+import Spinner from "../../components/Shared/Spinner/Spinner";
+import { getSliders } from "../../api/get";
+import useAuth from "../../hooks/useAuth";
 
 const Banner = () => {
    const [bannerSliders, setBannerSliders] = useState([]);
+   const { loading, setLoading } = useAuth();
 
    useEffect(() => {
-      fetch('./bannerSlider.json')
-         .then(res => res.json())
+      setLoading(true);
+      getSliders()
          .then(data => {
             setBannerSliders(data);
+            setLoading(false);
+         })
+         .catch((error) => {
+            console.log(error);
          });
-   }, []);
+   }, [setLoading]);
+   if (loading) {
+      return <Spinner />;
+   }
+
 
    return (
       <>
