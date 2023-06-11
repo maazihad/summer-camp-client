@@ -112,7 +112,7 @@ const SignUp = () => {
                </label>
                <input {...register("image", { required: true })}
                   type="file" name="image" accept="image/*"
-                  className="file-input border-red-900 rounded-none bg-red-100"
+                  className="file-input file-input-secondary border-red-900 rounded-none bg-red-100"
                />
             </div>
 
