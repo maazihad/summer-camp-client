@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../../components/Shared/Spinner/Spinner";
-import { information } from "../../api/get";
 import Wrapper from "../../components/Shared/Wrapper/Wrapper";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
-const Instructors = () => {
-
-   const [instructors, setInstructors] = useState([]);
-   const { loading, setLoading } = useAuth();
-
-   useEffect(() => {
-      setLoading(true);
-      information()
-         .then(data => {
-            setInstructors(data);
-            setLoading(false);
-         })
-         .catch((error) => {
-            console.log(error);
-         });
-   }, [setLoading]);
+const PopularInstructors = () => {
+   const { loading } = useAuth();
+   const [axiosSecure] = useAxiosSecure();
+   const getPopularInstructors = async () => {
+      try {
+         const res = await axiosSecure.get('/allInfo');
+         // console.log(res.data);
+         return res.data;
+      } catch (error) {
+         console.error(error);
+         throw error;
+      }
+   };
+   const { data: popularInstructorByFilter = [] } = useQuery(['popularInstructor'], getPopularInstructors, {
+      enabled: !loading
+   });
    if (loading) {
       return <Spinner />;
    }
 
-
-   const popularInstructors = instructors.filter(instructor => instructor.availableSeats === 15);
+   const allPopularInstructorsFiltering = popularInstructorByFilter.filter(instructorPopular => instructorPopular.availableSeats === 15);
 
    return (
       <>
@@ -34,7 +33,7 @@ const Instructors = () => {
             <p className="text-center gamjaFlower text-red-800 font-bold mb-5 text-2xl">Capturing Moments, Guided by Masters</p>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 gamjaFlower ">
                {
-                  popularInstructors.slice(0, 6).map((instructor, index) => <div
+                  allPopularInstructorsFiltering.slice(0, 6).map((instructor, index) => <div
                      key={index}
                   >
                      <div className="card w-full  rounded-none bg-red-100">
@@ -55,4 +54,4 @@ const Instructors = () => {
    );
 };
 
-export default Instructors;
+export default PopularInstructors;

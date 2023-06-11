@@ -2,9 +2,9 @@
 import { useState } from "react";
 import Switch from "react-switch";
 import Banner from "./Banner";
-import Popular from "./Popular";
-import Instructors from "./Instructors";
-import Album from "./Album";
+import PopularClasses from "./PopularClasses";
+import PopularInstructors from "./PopularInstructors";
+import AlbumSection from "./AlbumSection";
 
 
 const Home = () => {
@@ -34,9 +34,9 @@ const Home = () => {
          </label>
          <div className={checked ? "bg-neutral-900 text-white" : "bg-red-100 text-black"}>
             <Banner />
-            <Popular />
-            <Instructors />
-            <Album />
+            <PopularClasses />
+            <PopularInstructors />
+            <AlbumSection />
          </div>
       </div>
    );
