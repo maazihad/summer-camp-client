@@ -5,6 +5,7 @@ import Authentication from '../pages/Authentication/Authentication';
 import Home from '../pages/Home/Home';
 import Instructors from '../pages/Instructors/Instructors';
 import Classes from '../pages/Classes/Classes';
+import TermsAndConditions from '../pages/TermsAndConditions/TermsAndConditions';
 
 export const router = createBrowserRouter([
    {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
          {
             path: 'classes',
             element: <Classes />
+         },
+         {
+            path: 'terms',
+            element: <TermsAndConditions />
          }
       ]
    },

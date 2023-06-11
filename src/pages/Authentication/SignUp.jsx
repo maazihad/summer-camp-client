@@ -1,12 +1,18 @@
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { saveUser } from "../../api/auth.js";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const imageHostingToken = import.meta.env.VITE_Image_Upload_token;
 const SignUp = () => {
+
+   const [acceptTerms, setAcceptTerms] = useState(false);
+
+   const [showPassword, setShowPassword] = useState(false);
    const navigate = useNavigate();
    const location = useLocation();
    const from = location.state?.from?.pathName || '/';
@@ -14,7 +20,7 @@ const SignUp = () => {
 
    const { createUser, updateUserProfile, setLoading, } = useAuth();
 
-   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+   const { register, handleSubmit, reset, control, formState: { errors } } = useForm();
 
    const onSubmit = data => {
       console.log(data);
@@ -67,6 +73,11 @@ const SignUp = () => {
       return;
    };
 
+   const handleTermsAndConditions = (event) => {
+      setAcceptTerms(event.target.checked);
+   };
+
+
    return (
       <div className="lg:w-2/3">
          <form onSubmit={handleSubmit(onSubmit)} className="pb-3 schoolbell">
@@ -86,7 +97,7 @@ const SignUp = () => {
                {errors.email && <span className="text-red-700 text-md ">Email field is required!</span>}
             </div>
 
-            <div className="form-control">
+            <div className="form-control relative">
                <label className="label">
                   <span className="label-text -ml-1 ">Password</span>
                </label>
@@ -95,7 +106,7 @@ const SignUp = () => {
                   minLength: 6,
                   maxLength: 20,
                   pattern: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/
-               })} type="password" name="password" placeholder="password" className="input border-red-900 rounded-none bg-red-100" />
+               })} type={showPassword ? "text" : "password"} name="password" placeholder="password" className="input border-red-900 rounded-none bg-red-100" />
 
                {errors.password?.type === 'required' && <span className="text-red-700 text-md">Password is required!</span>}
 
@@ -104,6 +115,16 @@ const SignUp = () => {
                {errors.password?.type === 'maxLength' && <p role="alert">Password must less than 20 characters long.</p>}
 
                {errors.password?.type === 'pattern' && <p role="alert">Minimum six characters, at least one uppercase letter, one lowercase letter, one number and one special character.</p>}
+
+               <span className='absolute right-5 top-12' onClick={() => setShowPassword(!showPassword)}>
+                  <small>
+                     {
+                        showPassword
+                           ? <FaEye className='cursor-pointer text-2xl text-red-700' />
+                           : <FaEyeSlash className='cursor-pointer text-2xl text-red-900 ' />
+                     }
+                  </small>
+               </span>
             </div>
 
             <div className="form-control mt-3">
@@ -116,6 +137,19 @@ const SignUp = () => {
                />
             </div>
 
+            <div className="form-control cursor-pointer mt-3">
+               <label className="label flex items-center justify-start">
+                  <input
+                     type="checkbox"
+                     {...register("acceptTerms", { required: true })}
+                     onChange={handleTermsAndConditions}
+                     className="mr-2"
+                  />
+                  <span className="ml-2">I accept the <Link to="/terms" className="text-red-800 font-bold">Terms &amp; Conditions</Link></span>
+               </label>
+               {errors.acceptTerms && <span className="text-red-700 text-xl cursor-pointer">You must accept the Terms &amp; Conditions!</span>}
+            </div>
+
             {/* <div className="form-control">
                <label className="label -ml-1">
                   <span className="label-text">Photo URL</span>
@@ -124,8 +158,8 @@ const SignUp = () => {
                {errors.photoUrl && <span className="text-red-700 text-md">Photo url is required!</span>}
             </div> */}
 
-            <div className="form-control mt-6">
-               <input className="btn text-red-900 transition-all font-bold duration-500 btn-outline rounded-none hover:bg-red-300 hover:border-transparent hover:text-red-900 border-red-900 capitalize ease-in-out" type="submit" value="Sign Up" />
+            <div className="form-control mt-3">
+               <input className="btn text-red-900 transition-all font-bold duration-500 btn-outline rounded-none hover:bg-red-300 hover:border-transparent hover:text-red-900 border-red-900 capitalize ease-in-out" type="submit" value="Sign Up" disabled={!acceptTerms} />
             </div>
          </form>
       </div>

@@ -3,12 +3,13 @@ import { Helmet } from "react-helmet-async";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import SocialLogin from "./SocialLogin";
+import Wrapper from "../../components/Shared/Wrapper/Wrapper";
 
 const Authentication = () => {
    const [newUser, setNewUser] = useState(false);
 
    return (
-      <>
+      <Wrapper>
          <Helmet>
             <title>{newUser ? "Sign Up" : "Login"} || RAOSU Summer Camp Photography School</title>
          </Helmet>
@@ -52,7 +53,7 @@ const Authentication = () => {
 
             </div>
          </section >
-      </>
+      </Wrapper>
    );
 };
 
