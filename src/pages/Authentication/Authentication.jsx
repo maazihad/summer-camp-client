@@ -13,7 +13,7 @@ const Authentication = () => {
          <Helmet>
             <title>{newUser ? "Sign Up" : "Login"} || RAOSU Summer Camp Photography School</title>
          </Helmet>
-         <section className=" text-gray-900 ">
+         <section className=" text-gray-900 pb-10">
             <div className="grid lg:grid-cols-2">
 
                <div className="lg:w-full text-center flex justify-center items-center">

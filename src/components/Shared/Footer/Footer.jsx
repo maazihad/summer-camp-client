@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const Footer = () => {
    return (
-      <footer className="  bg-green-200 ">
+      <footer className="  bg-red-200 ">
          <div className='footer p-10 text-base-content max-w-7xl mx-auto'>
             <div>
                <Link to="/">
@@ -18,22 +18,21 @@ const Footer = () => {
             </div>
             <div>
                <span className="text-md font-bold">Services</span>
-               <Link to="/footer/marketing" className="link link-hover">Marketing</Link>
-               <Link to="/" className="link link-hover">Branding</Link>
+               <Link to="/" className="link link-hover">Spring</Link>
+               <Link to="/" className="link link-hover">Autumn</Link>
                <Link to="/" className="link link-hover">Advertisement</Link>
             </div>
             <div>
-               <span className="text-md font-bold">Company</span>
-               <Link to="/footer/aboutus" className="link link-hover">About us</Link>
+               <span className="text-md font-bold">Institute</span>
+               <Link to="/about-us" className="link link-hover">About us</Link>
                <Link to="/" className="link link-hover">Home</Link>
-               <Link to="/footer/contact" className="link link-hover">Contact</Link>
-               <Link to="/blog" className="link link-hover">Blog</Link>
+               <Link to="/contact" className="link link-hover">Contact</Link>
             </div>
             <div>
-               <span className="text-md font-bold">Legal</span>
-               <Link to="/footer/terms" className="link link-hover">Terms & Conditions</Link>
-               <Link to="/footer/policy" className="link link-hover">Privacy policy</Link>
-               <Link to="/" className="link link-hover">Cookie policy</Link>
+               <span className="text-md font-bold">Legal Info</span>
+               <Link to="/terms" className="link link-hover">Terms & Conditions</Link>
+               <Link to="/privacy" className="link link-hover">Privacy policy</Link>
+               <Link to="/cookie" className="link link-hover">Cookie policy</Link>
             </div>
          </div>
       </footer>
