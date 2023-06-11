@@ -1,9 +1,10 @@
 
 import { useState } from "react";
 import Switch from "react-switch";
-import Banner from "../../components/Home/Banner";
-import Popular from "../../components/Home/Popular";
-import Instructors from "../../components/Home/Instructors";
+import Banner from "./Banner";
+import Popular from "./Popular";
+import Instructors from "./Instructors";
+import Album from "./Album";
 
 
 const Home = () => {
@@ -35,6 +36,9 @@ const Home = () => {
             <Banner />
             <Popular />
             <Instructors />
+            <h2 className="text-5xl mb-6  mt-12 text-red-900 font-bold text-center abril">Students best Clicking Shot</h2>
+            <p className="text-center gamjaFlower text-red-800 font-bold mb-5 text-2xl">Explore the World Through Your Lens</p>
+            <Album />
          </div>
       </div>
    );

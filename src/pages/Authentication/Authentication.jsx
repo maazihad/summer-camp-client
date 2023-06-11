@@ -1,8 +1,8 @@
 import { useState } from "react";
-import SocialLogin from "../../components/Shared/Authentication/SocialLogin";
 import { Helmet } from "react-helmet-async";
-import SignUp from "../../components/Shared/Authentication/SignUp";
-import SignIn from "../../components/Shared/Authentication/SignIn";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
+import SocialLogin from "./SocialLogin";
 
 const Authentication = () => {
    const [newUser, setNewUser] = useState(false);
@@ -10,7 +10,7 @@ const Authentication = () => {
    return (
       <>
          <Helmet>
-            <title>{newUser ? "Sign Up" : "Login"} || RAOSU Summer Photography School</title>
+            <title>{newUser ? "Sign Up" : "Login"} || RAOSU Summer Camp Photography School</title>
          </Helmet>
          <section className=" text-gray-900 ">
             <div className="grid lg:grid-cols-2">

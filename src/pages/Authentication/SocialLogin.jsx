@@ -1,8 +1,7 @@
 import { toast } from "react-hot-toast";
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../hooks/useAuth";
 
 const SocialLogin = ({ newUser }) => {
    const { signInWithGoogle } = useAuth();
@@ -21,7 +20,7 @@ const SocialLogin = ({ newUser }) => {
                email: loggedUser.email,
             };
 
-            fetch("http://localhost:5000/users", {
+            fetch("http://localhost:5999/allUsers", {
                method: "POST",
                headers: {
                   "content-type": "application/json",

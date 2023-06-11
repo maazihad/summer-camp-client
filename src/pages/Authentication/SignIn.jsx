@@ -1,10 +1,9 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { Helmet } from "react-helmet-async";
-import greetings from "../../../api/greetings";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import greetings from "../../api/greetings";
 
 
 const SignIn = () => {

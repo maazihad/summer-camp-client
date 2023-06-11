@@ -3,6 +3,7 @@ import MainLayout from '../layouts/MainLayout';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import Authentication from '../pages/Authentication/Authentication';
 import Home from '../pages/Home/Home';
+import Instructors from '../pages/Instructors/Instructors';
 
 export const router = createBrowserRouter([
    {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
          {
             path: 'authentication',
             element: <Authentication />
+         },
+         {
+            path: 'instructors',
+            element: <Instructors />
          }
       ]
    },
