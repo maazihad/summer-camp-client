@@ -2,16 +2,16 @@ import Spinner from "../../components/Shared/Spinner/Spinner";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import ClassCard from "./ClassCard";
 import Wrapper from "../../components/Shared/Wrapper/Wrapper";
+import ClassCard from "./ClassCard";
 
 const Classes = () => {
    const { loading } = useAuth();
-   const [axiosSecure] = useAxiosSecure();
+   const axiosSecure = useAxiosSecure();
    const getClasses = async () => {
       try {
          const res = await axiosSecure.get('/allInfo');
-         console.log(res.data);
+         // console.log(res.data);
          return res.data;
       } catch (error) {
          console.error(error);

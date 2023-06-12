@@ -10,6 +10,10 @@ import TermsAndConditions from '../pages/TermsAndConditions/TermsAndConditions';
 import PrivacyAndPolicy from '../pages/PrivacyAndPolicy/PrivacyAndPolicy';
 import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import Contact from '../pages/Contact/Contact';
+import ClassDetails from '../pages/Classes/ClassDetails';
+import { eachClassDetails } from '../api/get';
+import SecretRoute from './SecretRoute';
+import DashboardLayout from '../layouts/DashboardLayout';
 
 export const router = createBrowserRouter([
    {
@@ -34,6 +38,11 @@ export const router = createBrowserRouter([
             element: <Classes />
          },
          {
+            path: 'class/:id',
+            element: <SecretRoute><ClassDetails /></SecretRoute>,
+            loader: ({ params }) => eachClassDetails(params.id)
+         },
+         {
             path: 'about-us',
             element: <AboutUs />
          },
@@ -53,6 +62,42 @@ export const router = createBrowserRouter([
             path: 'contact',
             element: <Contact />
          },
+      ]
+   },
+   {
+      path: '/dashboard',
+      element: <SecretRoute><DashboardLayout /></SecretRoute>,
+      children: [
+         {
+            path: '/dashboard',
+            element: <MyBookings />
+         },
+         // {
+         //    path: 'userhome',
+         //    element: <UserHome />
+         // },
+
+         // {
+         //    path: 'payment',
+         //    element: <Payment />
+         // },
+         //=================Admin routes
+         {
+            path: 'adminhome',
+            element: <AdminHome />
+         },
+         {
+            path: 'allusers',
+            element: <AdminRoute><AllUsers /></AdminRoute>
+         },
+         {
+            path: 'additem',
+            element: <AdminRoute><AddItem /></AdminRoute>
+         },
+         {
+            path: 'manageitems',
+            element: <AdminRoute><ManageItems /></AdminRoute>
+         }
       ]
    }
 ]);

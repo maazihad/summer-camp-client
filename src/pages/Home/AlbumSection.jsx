@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const AlbumSection = () => {
    const { loading } = useAuth();
-   const [axiosSecure] = useAxiosSecure();
+   const axiosSecure = useAxiosSecure();
    const getAlbums = async () => {
       try {
          const res = await axiosSecure.get('/allInfo');
@@ -27,7 +27,7 @@ const AlbumSection = () => {
       <Wrapper>
          <h2 className="text-5xl mb-6  mt-12 text-red-900 font-bold text-center abril">Students best Clicking Shot</h2>
          <p className="text-center gamjaFlower text-red-800 font-bold mb-5 text-2xl">Explore the World Through Your Lens</p>
-         <div className='grid  xl:grid-cols-5 md:grid-cols-3 lg:grid-cols-4 grid-cols-1 gap-4'>
+         <div className='grid pb-10 xl:grid-cols-5 md:grid-cols-3 lg:grid-cols-4 grid-cols-1 gap-4'>
             {
                albums.map(album => <div
                   key={album._id}

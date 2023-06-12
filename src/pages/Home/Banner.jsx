@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const Banner = () => {
    const { loading } = useAuth();
-   const [axiosSecure] = useAxiosSecure();
+   const axiosSecure = useAxiosSecure();
    const getBanners = async () => {
       try {
          const res = await axiosSecure.get('/sliders');

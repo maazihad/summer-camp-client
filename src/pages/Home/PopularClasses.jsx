@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const PopularClasses = () => {
    const { loading } = useAuth();
-   const [axiosSecure] = useAxiosSecure();
+   const axiosSecure = useAxiosSecure();
    const getPopularClasses = async () => {
       try {
          const res = await axiosSecure.get('/allInfo');

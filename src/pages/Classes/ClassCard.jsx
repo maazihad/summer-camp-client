@@ -1,31 +1,72 @@
 import { FaRegHandPointLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const ClassCard = ({ allClass }) => {
+   const handleProgramDetails = () => {
+
+      if (allClass.availableSeats === 0) {
+         Swal.fire({
+            title: 'Program Full',
+            text: 'This program is currently full. No seats available.',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+         });
+      } else {
+         Swal.fire({
+            title: 'Your first login!!!',
+            text: 'If you want details the course. Please Login.',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+         });
+      }
+   };
+
    return (
-
-
-      <Link to="" className="group overflow-hidden " title="Join a camp with us">
-         <div className="lg:flex m-5 shadow-xl overflow-hidden object-cover h-full group-hover:scale-110 ease-in-out duration-700">
-            <div className="lg:avatar xl:avatar m-4">
+      <div className="group">
+         <div
+            className={`lg:flex m-5 shadow-xl object-cover h-full hover:shadow-lg hover:shadow-neutral-600 ${allClass.availableSeats === 0
+               ? 'bg-gradient-to-r from-red-500 to-red-600 opacity-70 text-orange-200 cursor-not-allowed' : 'cursor-pointer animate-none'}`}
+         >
+            <div className="lg:avatar xl:avatar m-4 hover:ease-in-out hover:duration-700">
                <div className="lg:w-52 group overflow-hidden">
-                  <img className="w-full object-cover h-full group-hover:scale-110 ease-in-out duration-300" src={allClass.picture} alt="Album" />
+                  <img
+                     className="w-full object-cover h-full group-hover:scale-110 ease-in-out duration-300"
+                     src={allClass.picture}
+                     alt="Album"
+                  />
                </div>
             </div>
             <div className="p-3 mt-10">
-               <div>
+               <div className="animate-pulse">
                   <h2 className="font-bold">Activity Name: {allClass.activityName}</h2>
-                  <p className=""> <span className="font-bold">Instructor Name :</span> <span className="break-all">{allClass.instructorName}</span></p>
-                  <p className=""> <span className="font-bold">Available Seats :</span> <span className="break-all">{allClass.availableSeats}</span></p>
-                  <p className=""> <span className="font-bold">Camp Cost :</span> <span className="break-all">{allClass.campCost}</span></p>
+                  <p className="">
+                     <span className="font-bold">Instructor Name :</span>{' '}
+                     <span className="break-all">{allClass.instructorName}</span>
+                  </p>
+                  <p className="">
+                     <span className="font-bold">Available Seats :</span>{' '}
+                     <span className="break-all">{allClass.availableSeats}</span>
+                  </p>
+                  <p className="">
+                     <span className="font-bold">Camp Cost :</span>{' '}
+                     <span className="break-all">{allClass.campCost}</span>
+                  </p>
                </div>
-               <div className=" mr-3 text-end mt-5">
-                  <button className="btn self-end btn-primary btn-sm capitalize bg-red-900 hover:bg-red-700 rounded-full border-0 ">Join Camp <FaRegHandPointLeft size={24} /></button>
+               <div className="mr-3 text-end mt-5">
+                  <Link to={`/class/${allClass._id}`}>
+                     <button
+                        className={`btn self-end btn-primary btn-sm capitalize bg-red-900 rounded-full border-0 hover:bg-red-700 cursor-pointer ${allClass.availableSeats === 0 ? 'disabled' : ''}`}
+                        disabled={allClass.availableSeats === 0}
+                        onClick={handleProgramDetails}
+                     >
+                        Programme Details <FaRegHandPointLeft size={24} />
+                     </button>
+                  </Link>
                </div>
             </div>
          </div>
-
-      </Link>
+      </div>
    );
 };
 

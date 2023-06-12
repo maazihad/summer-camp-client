@@ -8,7 +8,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Instructors = () => {
    const { loading } = useAuth();
-   const [axiosSecure] = useAxiosSecure();
+   const axiosSecure = useAxiosSecure();
    const getInstructors = async () => {
       try {
          const res = await axiosSecure.get('/instructors');

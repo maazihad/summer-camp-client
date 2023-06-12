@@ -14,6 +14,14 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
    const [user, setUser] = useState(null);
    const [loading, setLoading] = useState(true);
+   // const [position, setPosition] = useState(null);
+
+   // useEffect(() => {
+   //    if (user) {
+   //       getRole(user.email)
+   //          .then(data => setRole(data));
+   //    }
+   // }, [user]);
 
    const createUser = (email, password) => {
       setLoading(true);
