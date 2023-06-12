@@ -92,7 +92,7 @@ const DropDown = ({ handleLogOut }) => {
                            <p className="px-4 hidden lg:block py-3 text-center  transition font-semibold shadow-sm bg-red-800 text-white shadow-neutral-900 hover:bg-red-900 capitalize">{user?.displayName}</p>
                            <NavLink
                               to='/dashboard'
-                              className={({ isActive }) => isActive ? "block lg:hidden px-4 py-3 hover:bg-neutral-300 transition font-semibold bg-red-300 text-black" : "block lg:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold"}
+                              className={({ isActive }) => isActive ? "block  px-4 py-3 hover:bg-neutral-300 transition font-semibold bg-red-300 text-black" : "block  px-4 py-3 hover:bg-neutral-100 transition font-semibold"}
                            >
                               Dashboard
                            </NavLink>

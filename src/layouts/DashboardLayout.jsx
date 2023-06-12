@@ -4,13 +4,13 @@ import { AiFillHome, } from 'react-icons/ai';
 import { BsCalendarEventFill, BsFillCartFill, BsFillMenuAppFill } from 'react-icons/bs';
 import { MdPayment, MdDashboard } from 'react-icons/md';
 import { BiFoodMenu } from 'react-icons/bi';
-import useCart from "../hooks/useCart";
 import { FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import useAdmin from "../hooks/useAdmin";
+import useClasses from "../hooks/useClasses";
 
 const Dashboard = () => {
-   const [cart] = useCart();
+   const [classes] = useClasses();
 
    //  TODO: Load data from the server to have dynamic isAdmin based of data 
    // const isAdmin = true;
@@ -121,7 +121,7 @@ const Dashboard = () => {
                                     ? "active" : ""
                            }
                         > <BsFillCartFill />My Cart
-                           <span className="badge badge-secondary">+{cart?.length || 0}</span>
+                           <span className="badge badge-secondary">+{classes?.length || 0}</span>
                         </NavLink>
                      </li>
                   </>

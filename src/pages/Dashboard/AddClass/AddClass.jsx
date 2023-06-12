@@ -1,15 +1,14 @@
-import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from 'react-hook-form';
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
 
 const AddClass = () => {
-   const [axiosSecure] = useAxiosSecure();
+   const axiosSecure = useAxiosSecure();
    const { register, handleSubmit, reset } = useForm();
-   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
+   const url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
    const onSubmit = data => {
       console.log(data);
@@ -17,7 +16,7 @@ const AddClass = () => {
       const formData = new FormData();
       formData.append('image', data.image[0]);
 
-      fetch(img_hosting_url, {
+      fetch(url, {
          method: 'POST',
          body: formData
       })
@@ -29,6 +28,7 @@ const AddClass = () => {
                const newItem = { name, price: parseFloat(price), category, recipe, image: imgURL };
                console.log(newItem);
 
+               //TODO:====================/menu
                axiosSecure.post('/menu', newItem)
                   .then(data => {
                      console.log('after posting new menu item', data.data);
@@ -55,7 +55,7 @@ const AddClass = () => {
          <Helmet>
             <title>Bistro Boss Restaurant || Add Item</title>
          </Helmet>
-         <SectionTitle subHeading="What's new" heading="Add an item" ></SectionTitle>
+
          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control w-full mb-4">
                <label className="label">

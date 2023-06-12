@@ -14,6 +14,14 @@ import ClassDetails from '../pages/Classes/ClassDetails';
 import { eachClassDetails } from '../api/get';
 import SecretRoute from './SecretRoute';
 import DashboardLayout from '../layouts/DashboardLayout';
+import MyBookings from '../pages/Dashboard/MyBookings/MyBookings';
+import UserHome from '../pages/Dashboard/UserHome/UserHome';
+import Payment from '../pages/Dashboard/Payments/Payment';
+import AdminHouse from '../pages/Dashboard/AdminHouse/AdminHouse';
+import AdminRoute from './AdminRoute';
+import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
+import AddClass from '../pages/Dashboard/AddClass/AddClass';
+import ManageClasses from '../pages/Dashboard/ManageClasses/ManageClass';
 
 export const router = createBrowserRouter([
    {
@@ -72,32 +80,33 @@ export const router = createBrowserRouter([
             index: true,
             element: <MyBookings />
          },
-         // {
-         //    path: 'userhome',
-         //    element: <UserHome />
-         // },
+         {
+            path: 'user-home',
+            element: <UserHome />
+         },
 
-         // {
-         //    path: 'payment',
-         //    element: <Payment />
-         // },
+         {
+            path: 'payments',
+            element: <Payment />
+         },
          //=================Admin routes
          {
-            path: 'adminhome',
-            element: <AdminHome />
+            path: 'admin-home',
+            element: <AdminHouse />
          },
          {
             path: 'users',
-            element: <AdminRoute><users /></AdminRoute>
+            element: <AdminRoute><AllUsers /></AdminRoute>
          },
          {
-            path: 'additem',
-            element: <AdminRoute><AddItem /></AdminRoute>
+            path: 'add-item',
+            element: <AdminRoute><AddClass /></AdminRoute>
          },
          {
-            path: 'manageitems',
-            element: <AdminRoute><ManageItems /></AdminRoute>
+            path: 'manage-classes',
+            element: <AdminRoute><ManageClasses /></AdminRoute>
          }
+         //================Instructor route===================
       ]
    }
 ]);
