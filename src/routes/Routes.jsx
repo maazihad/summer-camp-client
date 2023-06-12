@@ -69,7 +69,7 @@ export const router = createBrowserRouter([
       element: <SecretRoute><DashboardLayout /></SecretRoute>,
       children: [
          {
-            path: '/dashboard',
+            index: true,
             element: <MyBookings />
          },
          // {
@@ -87,8 +87,8 @@ export const router = createBrowserRouter([
             element: <AdminHome />
          },
          {
-            path: 'allusers',
-            element: <AdminRoute><AllUsers /></AdminRoute>
+            path: 'users',
+            element: <AdminRoute><users /></AdminRoute>
          },
          {
             path: 'additem',

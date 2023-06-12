@@ -7,13 +7,13 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const Instructors = () => {
 
    const [axiosSecure] = useAxiosSecure();
-   const { data: allUsers = [], refetch } = useQuery(['AllUsers'], async () => {
-      const res = await axiosSecure.get("/allUsers");
+   const { data: users = [], refetch } = useQuery(['users'], async () => {
+      const res = await axiosSecure.get("/users");
       return res.data;
    });
    const handleMakeAdmin = user => {
       console.log(user);
-      fetch(`/allUsers/admin/${user._id}`, {
+      fetch(`/users/admin/${user._id}`, {
          method: "PATCH",
       })
          .then(res => res.json())
@@ -58,7 +58,7 @@ const Instructors = () => {
             <title>Instructors || RAOSU Summer Camp Photography School</title>
          </Helmet>
 
-         <h2 className="text-2xl font-bold text-center text-red-900">Total users : {allUsers.length}</h2>
+         <h2 className="text-2xl font-bold text-center text-red-900">Total users : {users.length}</h2>
 
          <div className="overflow-x-auto">
             <table className="table table-zebra w-full">
@@ -75,7 +75,7 @@ const Instructors = () => {
                </thead>
                <tbody>
                   {
-                     allUsers.map((user, index) => <tr
+                     users.map((user, index) => <tr
                         key={user._id}
                      >
                         <th>{index + 1}</th>

@@ -6,8 +6,8 @@ import { MdPayment, MdDashboard } from 'react-icons/md';
 import { BiFoodMenu } from 'react-icons/bi';
 import useCart from "../hooks/useCart";
 import { FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
-import useAdmin from "../hooks/useAdmin";
 import { Helmet } from "react-helmet-async";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
    const [cart] = useCart();
@@ -73,7 +73,7 @@ const Dashboard = () => {
                      </li>
                      <li>
                         <NavLink
-                           to="/dashboard/allusers"
+                           to="/dashboard/users"
                            className={({ isActive, isPending }) =>
                               isPending
                                  ? "pending" : isActive

@@ -3,7 +3,7 @@ export const saveUser = async (user) => {
       name: user.displayName,
       email: user.email
    };
-   return fetch(`${import.meta.env.VITE_API_URL}/allUsers/${user?.email}`, {
+   return fetch(`${import.meta.env.VITE_API_URL}/users/${user?.email}`, {
       method: "PUT",
       headers: {
          'content-type': 'application/json'
