@@ -25,7 +25,7 @@ import ManageClasses from '../pages/Dashboard/ManageClasses/ManageClass';
 import PaymentHistory from '../pages/Dashboard/PaymentHistory/PaymentHistory';
 import MyClasses from '../pages/Dashboard/MyClasses/MyClasses';
 import UserProfile from '../pages/Dashboard/UserProfile/UserProfile';
-
+import MixedRoute from './MixedRoute';
 export const router = createBrowserRouter([
    {
       path: '/',
@@ -75,7 +75,6 @@ export const router = createBrowserRouter([
             path: 'contact',
             element: <Contact />
          },
-         //===========================Footer Extra route optional===============
       ]
    },
    {
@@ -118,13 +117,16 @@ export const router = createBrowserRouter([
          },
          {
             path: 'add-class',
-            element: <AdminRoute><AddClass /></AdminRoute>
+            element: <MixedRoute> <AddClass /></MixedRoute>
          },
          {
             path: 'manage-classes',
             element: <AdminRoute><ManageClasses /></AdminRoute>
          },
+
          //================Instructor route===================
+
+
       ]
    }
 ]);
