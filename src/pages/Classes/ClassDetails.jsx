@@ -1,9 +1,67 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Wrapper from "../../components/Shared/Wrapper/Wrapper";
+import useAuth from "../../hooks/useAuth";
+import useClasses from "../../hooks/useClasses";
+import Swal from "sweetalert2";
 
 const ClassDetails = () => {
-
+   const navigate = useNavigate();
    const classInfo = useLoaderData();
+
+   const { _id, activityName, picture, campCost } = classInfo;
+   // console.log(classInfo);
+   const [, refetch] = useClasses();
+
+   const { user } = useAuth();
+
+   const handleAddClass = classCartItem => {
+      console.log(classCartItem);
+
+      if (user && user.email) {
+
+         const classItem = {
+            classId: _id,
+            activityName,
+            picture,
+            price: campCost,
+            email: user.email
+         };
+         fetch(`${import.meta.env.VITE_API_URL}/classes`, {
+            method: 'POST',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify(classItem)
+         })
+            .then(res => res.json())
+            .then(data => {
+               if (data.insertedId) {
+                  refetch();
+                  Swal.fire({
+                     position: 'center',
+                     icon: 'success',
+                     title: 'Add Class successfully',
+                     showConfirmButton: false,
+                     timer: 1500
+                  });
+                  navigate("/dashboard/my-class");
+               }
+            });
+      }
+      // else {
+      //    Swal.fire({
+      //       title: 'Please Login first!!',
+      //       icon: 'warning',
+      //       showCancelButton: true,
+      //       confirmButtonColor: '#3085d6',
+      //       cancelButtonColor: '#d33',
+      //       confirmButtonText: 'Go to Login'
+      //    }).then((result) => {
+      //       if (result.isConfirmed) {
+
+      //          navigate("/login", { state: { from: location } });
+      //       }
+      //    });
+      // }
+   };
 
    return (
       <Wrapper>
@@ -35,8 +93,15 @@ const ClassDetails = () => {
                </div>
 
                <div className="card-actions justify-end mt-7">
-                  <button className="btn lg:btn-wide btn-block bg-red-500 text-white hover:bg-red-700 font-bold capitalize border-0 lg:mr-10">Book This Programme</button>
+                  <button
+                     onClick={() => handleAddClass(classInfo)}
+
+                     // disabled={user.email === classItem.email || roomData.booked}
+                     className="btn lg:btn-wide btn-block bg-red-500 text-white hover:bg-red-700 font-bold capitalize border-0 lg:mr-10">Book This Class</button>
                </div>
+
+
+               {/* ===============>>>>>>animation<<<<<<<<============ */}
                <div className="absolute top-5 w-12 h-12 right-5 animate-spin">
                   <span className="w-12 h-12 rounded-full p-2 ring ring-warning ring-offset-base-100 ring-offset-2 text-yellow-800 font-bold">${classInfo.campCost}</span>
                </div>

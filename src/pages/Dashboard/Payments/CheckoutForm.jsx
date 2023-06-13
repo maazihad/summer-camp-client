@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import "./CheckoutForm.css";
 
-const CheckoutForm = ({ cart, price }) => {
+const CheckoutForm = ({ price }) => {
    const stripe = useStripe();
    const elements = useElements();
    const { user } = useAuth();
@@ -78,13 +79,8 @@ const CheckoutForm = ({ cart, price }) => {
          const payment = {
             email: user?.email,
             transactionId: paymentIntent.id,
-            price,
-            date: new Date(),
-            quantity: cart.length,
-            cartItems: cart.map(item => item._id),
-            menuItems: cart.map(item => item.menuItemId),
-            status: 'service pending',
-            itemNames: cart.map(item => item.name)
+            totalPayment: price,
+            paymentDate: new Date(),
          };
          axiosSecure.post('/payments', payment)
             .then(res => {

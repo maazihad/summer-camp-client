@@ -34,20 +34,7 @@ const DropDown = ({ handleLogOut }) => {
    return (
       <div className='relative'>
          <div className='flex flex-row items-center gap-3'>
-            {/* {
-               !role && <>
-                  <div
-                     className='hidden md:block text-sm font-semibold py-3 px-8 rounded-full hover:bg-neutral-100 transition cursor-pointer' >
-                     <button
-                        onClick={() => setModal(true)}
-                        disabled={!user}
-                        className={user ? 'cursor-pointer' : 'cursor-not-allowed'}
-                     >
-                        AirCNC your home
-                     </button>
-                  </div>
-               </>
-            } */}
+
             <div
                onClick={() => setIsOpen(!isOpen)}
                className='p-1 md:py-1 md:px- border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md hover:shadow-red-900 transition'
@@ -115,7 +102,7 @@ const DropDown = ({ handleLogOut }) => {
                                  <button onClick={handleLogOut}>Logout</button>
                                  : <Link
                                     to='/authentication'
-                                    className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                    className='px-4 py-3 xl:hidden block hover:bg-neutral-100 transition font-semibold'
                                  >
                                     Login
                                  </Link>

@@ -7,15 +7,15 @@ import useClasses from "../../../hooks/useClasses";
 const Payment = () => {
 
    const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
-   const [cart] = useClasses();
-   const total = cart.reduce((sum, current) => sum + current.price, 0);
+   const [classes] = useClasses();
+   const total = classes.reduce((sum, current) => sum + current.price, 0);
    const price = parseFloat(total.toFixed(2));
    return (
       <div>
 
          <h2 className="text-3xl my-5 text-center text-red-800 font-semibold">Teka dao noile mor!!!</h2>
          <Elements stripe={stripePromise}>
-            <CheckoutForm cart={cart} price={price} />
+            <CheckoutForm classes={classes} price={price} />
          </Elements>
       </div>
    );

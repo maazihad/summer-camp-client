@@ -22,6 +22,9 @@ import AdminRoute from './AdminRoute';
 import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
 import AddClass from '../pages/Dashboard/AddClass/AddClass';
 import ManageClasses from '../pages/Dashboard/ManageClasses/ManageClass';
+import PaymentHistory from '../pages/Dashboard/PaymentHistory/PaymentHistory';
+import MyClasses from '../pages/Dashboard/MyClasses/MyClasses';
+import UserProfile from '../pages/Dashboard/UserProfile/UserProfile';
 
 export const router = createBrowserRouter([
    {
@@ -50,6 +53,8 @@ export const router = createBrowserRouter([
             element: <SecretRoute><ClassDetails /></SecretRoute>,
             loader: ({ params }) => eachClassDetails(params.id)
          },
+
+         //==========================Footer Extra route================
          {
             path: 'about-us',
             element: <AboutUs />
@@ -70,6 +75,7 @@ export const router = createBrowserRouter([
             path: 'contact',
             element: <Contact />
          },
+         //===========================Footer Extra route optional===============
       ]
    },
    {
@@ -84,28 +90,40 @@ export const router = createBrowserRouter([
             path: 'user-home',
             element: <UserHome />
          },
-
-         {
-            path: 'payments',
-            element: <Payment />
-         },
-         //=================Admin routes
          {
             path: 'admin-home',
             element: <AdminHouse />
          },
          {
+            path: 'payment',
+            element: <Payment />
+         },
+         {
+            path: 'my-class',
+            element: <MyClasses />
+         },
+         {
+            path: 'payment-history',
+            element: <PaymentHistory />
+         },
+         {
+            path: 'user-profile',
+            element: <UserProfile />
+         },
+
+         //=================Admin routes
+         {
             path: 'users',
             element: <AdminRoute><AllUsers /></AdminRoute>
          },
          {
-            path: 'add-item',
+            path: 'add-class',
             element: <AdminRoute><AddClass /></AdminRoute>
          },
          {
             path: 'manage-classes',
             element: <AdminRoute><ManageClasses /></AdminRoute>
-         }
+         },
          //================Instructor route===================
       ]
    }
