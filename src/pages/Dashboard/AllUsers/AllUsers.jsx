@@ -119,8 +119,6 @@ const AllUsers = () => {
 
                         </td>
 
-
-                        {/*  */}
                         <td>
                            <button onClick={() => handleDelete(user)} className="btn btn-ghost bg-red-700 btn-xs">
                               <FaTrashAlt className="text-md text-white" />

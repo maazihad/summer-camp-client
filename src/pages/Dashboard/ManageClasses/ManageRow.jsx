@@ -1,30 +1,10 @@
 import { useState } from 'react';
-import toast from 'react-hot-toast';
-import DeleteModal from './DeleteModal';
 import UpdateModal from './UpdateModal';
-import { deleteClasses } from '../../../api/classes';
 
-const ManageRow = ({ classItem, refetch }) => {
-   let [isOpen, setIsOpen] = useState(false);
+const ManageRow = ({ handleDelete, classItem, refetch }) => {
+
    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-   function openModal() {
-      setIsOpen(true);
-   }
-   function closeModal() {
-      setIsOpen(false);
-   }
-   const modalHandler = id => {
-      console.log(id);
-      deleteClasses(id)
-         .then(data => {
-            console.log(data);
-            refetch();
-            toast.success('Room deleted');
-         })
-         .catch(err => console.log(err));
-      closeModal();
-   };
    return (
       <tr>
          <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -33,40 +13,32 @@ const ManageRow = ({ classItem, refetch }) => {
                   <div className='block relative'>
                      <img
                         alt='profile'
-                        src={classItem?.image}
+                        src={classItem?.picture}
                         className='mx-auto object-cover rounded h-10 w-15 '
                      />
                   </div>
                </div>
-               <div className='ml-3'>
-                  <p className='text-gray-900 whitespace-no-wrap'>{classItem?.title}</p>
-               </div>
             </div>
          </td>
          <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-            <p className='text-gray-900 whitespace-no-wrap'>{classItem?.location}</p>
+            <p className='text-gray-900 capitalize whitespace-no-wrap'>{classItem?.activityName}</p>
          </td>
          <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-            <p className='text-gray-900 whitespace-no-wrap'>${classItem?.price}</p>
+            <p className='text-gray-900 capitalize whitespace-no-wrap'>{classItem?.instructorName}</p>
+         </td>
+         <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+            <p className='text-gray-900 normal-case whitespace-no-wrap'>{classItem?.email}</p>
+         </td>
+         <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+            <p className='text-gray-900 capitalize whitespace-no-wrap'>${classItem?.campCost}</p>
          </td>
 
          <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-            <span
-               onClick={openModal}
-               className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
-            >
-               <span
-                  aria-hidden='true'
-                  className='absolute inset-0 bg-red-200 opacity-50 rounded-full'
-               ></span>
-               <span className='relative'>Delete</span>
-            </span>
-            <DeleteModal
-               isOpen={isOpen}
-               closeModal={closeModal}
-               modalHandler={modalHandler}
-               id={classItem._id}
-            />
+
+            <button
+               onClick={() => handleDelete(classItem._id)}
+               className="btn btn-xs">delete</button>
+
          </td>
          <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
             <span
@@ -87,6 +59,13 @@ const ManageRow = ({ classItem, refetch }) => {
                refetch={refetch}
                setIsEditModalOpen={setIsEditModalOpen}
             />
+         </td>
+         <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+            <div className="btn-group">
+               <button className="btn btn-xs capitalize">pending</button>
+               <button className="btn btn-xs capitalize">approved</button>
+               <button className="btn btn-xs capitalize">denied</button>
+            </div>
          </td>
       </tr>
    );

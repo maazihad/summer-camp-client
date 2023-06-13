@@ -1,26 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { imageUpload } from '../../../api/utils';
 import { updateClasses } from '../../../api/classes';
 import UpdateClassForm from './UpdateClassForm';
 
-const UpdateModal = ({ setIsEditModalOpen, isOpen, refetch, room: classItem, id }) => {
+const UpdateModal = ({ setIsEditModalOpen, isOpen, refetch, classItem, id }) => {
    const [loading, setLoading] = useState(false);
    const [classesData, setClassesData] = useState(classItem);
-
-   const handleImageUpdate = image => {
-      setLoading(true);
-      imageUpload(image)
-         .then(res => {
-            setClassesData({ ...classesData, image: res.data.display_url });
-            setLoading(false);
-         })
-         .catch(err => {
-            console.log(err);
-            setLoading(false);
-         });
-   };
 
    const handleSubmit = event => {
       event.preventDefault();
@@ -31,7 +17,7 @@ const UpdateModal = ({ setIsEditModalOpen, isOpen, refetch, room: classItem, id 
       updateClasses(updatedData, id)
          .then(data => {
             console.log(data);
-            toast.success('Home info updated');
+            toast.success('Class information updated');
             setLoading(false);
             refetch();
             setIsEditModalOpen(false);
@@ -78,26 +64,15 @@ const UpdateModal = ({ setIsEditModalOpen, isOpen, refetch, room: classItem, id 
                            as='h3'
                            className='text-lg font-medium text-center leading-6 text-gray-900'
                         >
-                           Update Room Info
+                           Update Class Information
                         </Dialog.Title>
                         <div className='mt-2 w-full'>
                            <UpdateClassForm
                               handleSubmit={handleSubmit}
                               classesData={classesData}
                               setClassesData={setClassesData}
-                              handleImageUpdate={handleImageUpdate}
                               loading={loading}
                            />
-                        </div>
-                        <hr className='mt-8 ' />
-                        <div className='mt-2 '>
-                           <button
-                              type='button'
-                              className='inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
-                              onClick={() => setIsEditModalOpen(false)}
-                           >
-                              Cancel
-                           </button>
                         </div>
                      </Dialog.Panel>
                   </Transition.Child>

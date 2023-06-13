@@ -100,7 +100,7 @@ const AddClass = () => {
             <div className="grid lg:grid-cols-3 gap-5">
                <div className="form-control">
                   <label className="label ">
-                     <span className="label-text">Camp Cost</span>
+                     <span className="label-text">Course Fee</span>
                   </label>
                   <input {...register("campCost")} type="number" name="campCost" placeholder="Camp Cost" className="input input-bordered" />
                </div>

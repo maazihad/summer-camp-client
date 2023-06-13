@@ -1,19 +1,7 @@
 
-export const deleteClasses = async (id) => {
-   const response = await fetch(`${import.meta.env.VITE_API_URL}/classes/${id}`, {
-      method: "DELETE",
-      headers: {
-         'content-type': 'application/json'
-      }
-   });
-   const data = await response.json();
-   return data;
-};
-
-
 
 export const updateClasses = async (classData, id) => {
-   const response = await fetch(`${import.meta.env.VITE_API_URL}/classes/${id}`, {
+   const response = await fetch(`${import.meta.env.VITE_API_URL}/add-classes/${id}`, {
       method: "PUT",
       headers: {
          'content-type': 'application/json',
