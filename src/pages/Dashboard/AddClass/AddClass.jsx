@@ -53,7 +53,7 @@ const AddClass = () => {
       <div className=" px-10">
          {/* Helmet */}
          <Helmet>
-            <title>Bistro Boss Restaurant || Add Item</title>
+            <title>Raosu summer camp photography School || Add Item</title>
          </Helmet>
 
          <form onSubmit={handleSubmit(onSubmit)}>

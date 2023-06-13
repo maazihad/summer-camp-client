@@ -40,7 +40,7 @@ const MyClasses = () => {
    return (
       <div>
          <Helmet>
-            <title>Bistro Boss Restaurant || My Cart</title>
+            <title>Raosu summer camp photography School || My Cart</title>
          </Helmet>
 
          <div className="flex justify-between gap-5 items-center my-5">

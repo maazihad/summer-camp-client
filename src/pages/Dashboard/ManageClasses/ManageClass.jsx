@@ -46,7 +46,7 @@ const ManageClasses = () => {
       <div>
          {/* Helmet */}
          <Helmet>
-            <title>Bistro Boss Restaurant || Manage Items</title>
+            <title>Raosu summer camp photography School || Manage Items</title>
          </Helmet>
 
          <div className="overflow-x-auto">

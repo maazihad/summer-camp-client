@@ -46,21 +46,7 @@ const ClassDetails = () => {
                }
             });
       }
-      // else {
-      //    Swal.fire({
-      //       title: 'Please Login first!!',
-      //       icon: 'warning',
-      //       showCancelButton: true,
-      //       confirmButtonColor: '#3085d6',
-      //       cancelButtonColor: '#d33',
-      //       confirmButtonText: 'Go to Login'
-      //    }).then((result) => {
-      //       if (result.isConfirmed) {
 
-      //          navigate("/login", { state: { from: location } });
-      //       }
-      //    });
-      // }
    };
 
    return (

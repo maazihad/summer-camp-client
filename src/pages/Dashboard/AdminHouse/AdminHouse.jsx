@@ -62,7 +62,7 @@ const AdminHouse = () => {
    return (
       <div>
          <Helmet>
-            <title>Bistro Boss Restaurant || Admin Home</title>
+            <title>Raosu summer camp photography School || Admin Home</title>
          </Helmet>
          <div>
             <h2 className="text-3xl my-5 text-red-900 font-semibold text-center">Hi, {user?.displayName}</h2>

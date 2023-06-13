@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
             element: <Classes />
          },
          {
-            path: 'class/:id',
+            path: 'class-details/:id',
             element: <SecretRoute><ClassDetails /></SecretRoute>,
             loader: ({ params }) => eachClassDetails(params.id)
          },

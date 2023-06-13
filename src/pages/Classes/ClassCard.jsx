@@ -30,7 +30,7 @@ const ClassCard = ({ allClass }) => {
                navigate('/authentication');
             });
          } else {
-            navigate(`/class/${allClass._id}`);
+            navigate(`/class-details/${allClass._id}`);
          }
       }
 
@@ -68,7 +68,7 @@ const ClassCard = ({ allClass }) => {
                   </p>
                </div>
                <div className="mr-3 text-end mt-5">
-                  <Link to={`/class/${allClass._id}`}>
+                  <Link to={`/class-details/${allClass._id}`}>
                      <button
                         className={`btn self-end btn-primary btn-sm capitalize bg-red-900 rounded-full border-0 hover:bg-red-700 cursor-pointer ${allClass.availableSeats === 0 ? 'disabled' : ''}`}
                         disabled={allClass.availableSeats === 0}
