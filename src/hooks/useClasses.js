@@ -10,7 +10,6 @@ const useClasses = () => {
       enabled: !loading,
       queryFn: async () => {
          const res = await axiosSecure(`/classes?email=${user?.email}`);
-         // console.log("response from axios", res);
          return res.data;
       },
    });

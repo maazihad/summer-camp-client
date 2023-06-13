@@ -35,8 +35,9 @@ const AdminMenu = () => {
                      ? "pending" : isActive
                         ? "active" : ""
                }
-            > <FaWallet /> Manage Classes</NavLink>
+            > <FaWallet /> My Classes</NavLink>
          </li>
+
 
          <li>
             <NavLink

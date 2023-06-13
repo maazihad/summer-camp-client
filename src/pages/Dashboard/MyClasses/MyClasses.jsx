@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
 import useClasses from "../../../hooks/useClasses";
 import ClassRow from "./ClassRow";
 

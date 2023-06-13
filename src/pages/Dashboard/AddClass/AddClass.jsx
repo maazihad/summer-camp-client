@@ -1,105 +1,149 @@
-import { useForm } from 'react-hook-form';
-import Swal from "sweetalert2";
-import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const AddClass = () => {
+   const { user } = useAuth();
+   const { register, handleSubmit, reset, formState: { errors } } = useForm();
    const axiosSecure = useAxiosSecure();
-   const { register, handleSubmit, reset } = useForm();
-   const url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
-
-   const onSubmit = data => {
+   const onSubmit = async (data) => {
       console.log(data);
 
-      const formData = new FormData();
-      formData.append('image', data.image[0]);
-
-      fetch(url, {
-         method: 'POST',
-         body: formData
-      })
-         .then(res => res.json())
-         .then(imgResponse => {
-            if (imgResponse.success) {
-               const imgURL = imgResponse.data.display_url;
-               const { name, price, category, recipe } = data;
-               const newItem = { name, price: parseFloat(price), category, recipe, image: imgURL };
-               console.log(newItem);
-
-               //TODO:====================/menu
-               axiosSecure.post('/menu', newItem)
-                  .then(data => {
-                     console.log('after posting new menu item', data.data);
-                     if (data.data.insertedId) {
-                        reset();
-                        Swal.fire({
-                           position: 'center',
-                           icon: 'success',
-                           title: 'Item added successfully',
-                           showConfirmButton: false,
-                           timer: 1500
-                        });
-                     }
-                  });
+      axiosSecure.post('/add-class', data)
+         .then(data => {
+            console.log('after posting new menu item', data.data);
+            if (data.data.insertedId) {
+               // reset();
+               Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Class added successfully',
+                  showConfirmButton: false,
+                  timer: 1500
+               });
             }
          });
-
    };
 
 
-   return (
-      <div className=" px-10">
-         {/* Helmet */}
-         <Helmet>
-            <title>Raosu summer camp photography School || Add Item</title>
-         </Helmet>
 
+
+   return (
+      <div className="container mx-auto my-10">
+         <h1 className="text-4xl font-bold mb-4 text-center text-red-900">Add Class</h1>
          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control w-full mb-4">
-               <label className="label">
-                  <span className="label-text font-semibold">Recipe Name*</span>
-               </label>
-               <input type="text" placeholder="Recipe Name"
-                  {...register("name", { required: true, maxLength: 120 })}
-                  className="input input-bordered w-full " />
-            </div>
-            <div className="lg:flex lg:my-4 lg:gap-5">
-               <div className="form-control w-full ">
-                  <label className="label">
-                     <span className="label-text">Category*</span>
-                  </label>
-                  <select defaultValue="Pick One" {...register("category", { required: true })} className="select select-bordered">
-                     <option disabled>Pick One</option>
-                     <option>Pizza</option>
-                     <option>Soup</option>
-                     <option>Salad</option>
-                     <option>Dessert</option>
-                     <option>Desi</option>
-                     <option>Drinks</option>
-                  </select>
-               </div>
-               <div className="form-control w-full">
-                  <label className="label">
-                     <span className="label-text font-semibold">Price*</span>
-                  </label>
-                  <input type="number" {...register("price", { required: true })} placeholder="price" className="input input-bordered w-full " />
-               </div>
-            </div>
+
             <div className="form-control">
-               <label className="label">
-                  <span className="label-text">Recipe Details</span>
+               <label className="label ">
+                  <span className="label-text">Picture URL</span>
                </label>
-               <textarea {...register("recipe", { required: true })} className="textarea textarea-bordered h-24" placeholder="recipe details"></textarea>
+               <input {...register("picture")} type="text" name="picture" placeholder="Picture" className="input input-bordered" />
             </div>
-            <div className="form-control w-full my-4">
-               <label className="label">
-                  <span className="label-text">Item Image*</span>
+
+            <div className="grid lg:grid-cols-3 gap-5">
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Activity Name</span>
+                  </label>
+                  <input {...register("activityName", { required: true })} type="text" name="activityName" placeholder="Activity Name" className="input input-bordered" />
+                  {errors.activityName && <span className="text-red-700 text-md">Activity Name field is required!</span>}
+               </div>
+
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Instructor Name</span>
+                  </label>
+                  <input {...register("instructorName")} type="text" name="instructorName" placeholder="Instructor Name" className="input input-bordered" />
+               </div>
+
+
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Position</span>
+                  </label>
+                  <input {...register("position")} type="text" name="position" placeholder="Position" className="input input-bordered" />
+               </div>
+
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-5">
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Instructor Image</span>
+                  </label>
+                  <input {...register("instructorImage")} type="text" name="instructorImage" placeholder="Instructor Image" className="input input-bordered" />
+               </div>
+
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Email</span>
+                  </label>
+                  <input {...register("email", { required: true })} type="email" name="email" placeholder="Email" className="input input-bordered" defaultValue={user.email} />
+                  {errors.email && <span className="text-red-700 text-md">Email field is required!</span>}
+               </div>
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Popularity</span>
+                  </label>
+                  <input {...register("popularity")} type="text" name="popularity" placeholder="Popularity" className="input input-bordered" />
+               </div>
+            </div>
+
+            <div className="form-control">
+               <label className="label ">
+                  <span className="label-text">Activity Slogan</span>
                </label>
-               <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full " />
+               <input {...register("activitySlogan")} type="text" name="activitySlogan" placeholder="Activity Slogan" className="input input-bordered" />
             </div>
-            <input className="btn btn-sm btn-secondary mt-4" type="submit" value="Add Item" />
+
+            <div className="grid lg:grid-cols-3 gap-5">
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Camp Cost</span>
+                  </label>
+                  <input {...register("campCost")} type="number" name="campCost" placeholder="Camp Cost" className="input input-bordered" />
+               </div>
+
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Available Seats</span>
+                  </label>
+                  <input {...register("availableSeats")} type="number" name="availableSeats" placeholder="Available Seats" className="input input-bordered" />
+               </div>
+
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Category</span>
+                  </label>
+                  <input {...register("category")} type="text" name="category" placeholder="Category" className="input input-bordered" />
+               </div>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-5">
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Duration</span>
+                  </label>
+                  <input {...register("duration")} type="text" name="duration" placeholder="Duration" className="input input-bordered" />
+               </div>
+
+               <div className="form-control">
+                  <label className="label ">
+                     <span className="label-text">Ratings</span>
+                  </label>
+                  <input {...register("ratings")} type="number" name="ratings" placeholder="Ratings" className="input input-bordered" />
+               </div>
+            </div>
+
+            <div className="form-control">
+               <label className="label ">
+                  <span className="label-text">Course Details</span>
+               </label>
+               <textarea {...register("courseDetails")} name="courseDetails" placeholder="Course Details" className="textarea textarea-bordered"></textarea>
+            </div>
+
+            <button type="submit" className="btn btn-primary mt-4">Add Class</button>
          </form>
       </div>
    );

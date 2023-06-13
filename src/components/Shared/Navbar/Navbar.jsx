@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-// import { useState } from "react";
 import { toast } from "react-hot-toast";
-// import { BsFillCartFill } from "react-icons/bs";
 import logo from "../../../assets/logo/logo.png";
 import DropDown from "./DropDown";
 import Wrapper from "../Wrapper/Wrapper";
@@ -11,22 +9,6 @@ import useAuth from "../../../hooks/useAuth";
 const Navbar = () => {
 
    const { logOut } = useAuth();
-
-   // const [buyClasses, setBuyClasses] = useState([]);
-   // useEffect(() => {
-   //    fetch(`http://localhost:5000/my-cart?email=${user?.email}`, {
-   //       headers: {
-   //          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-   //       },
-   //    })
-   //       .then((res) => res.json())
-   //       .then((data) => setBuyClasses(data[0].totalCount[0].count));
-   // }, [user]);
-
-
-
-
-
 
    const handleLogOut = () => {
       logOut()

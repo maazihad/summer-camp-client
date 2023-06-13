@@ -8,29 +8,6 @@ const DropDown = ({ handleLogOut }) => {
    const { user, logOut } = useAuth();
    const [isOpen, setIsOpen] = useState(false);
 
-   // const navigate = useNavigate();
-   // const [modal, setModal] = useState(false);
-   // console.log(role);
-
-
-   // const modalHandler = email => {
-   //    becomeHost(email)
-   //       .then(data => {
-   //          console.log(data);
-   //          toast.success("Your are host now, Post Rooms!!!");
-   //          setRole('host');
-   //          navigate('/dashboard/add-room');
-   //          closeModal();
-   //       });
-   // };
-
-   // const closeModal = () => {
-   //    setModal(false);
-   // };
-
-
-
-
    return (
       <div className='relative'>
          <div className='flex flex-row items-center gap-3'>
@@ -114,12 +91,7 @@ const DropDown = ({ handleLogOut }) => {
                   </div>
                </div>
             )}
-         {/* <HostModal
-            email={user?.email}
-            isOpen={modal}
-            modalHandler={modalHandler}
-            closeModal={closeModal}
-         /> */}
+
       </div>
    );
 };

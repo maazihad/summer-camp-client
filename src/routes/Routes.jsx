@@ -11,21 +11,20 @@ import PrivacyAndPolicy from '../pages/PrivacyAndPolicy/PrivacyAndPolicy';
 import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import Contact from '../pages/Contact/Contact';
 import ClassDetails from '../pages/Classes/ClassDetails';
-import { eachClassDetails } from '../api/get';
 import SecretRoute from './SecretRoute';
 import DashboardLayout from '../layouts/DashboardLayout';
-import MyBookings from '../pages/Dashboard/MyBookings/MyBookings';
 import UserHome from '../pages/Dashboard/UserHome/UserHome';
 import Payment from '../pages/Dashboard/Payments/Payment';
 import AdminHouse from '../pages/Dashboard/AdminHouse/AdminHouse';
 import AdminRoute from './AdminRoute';
 import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
 import AddClass from '../pages/Dashboard/AddClass/AddClass';
-import ManageClasses from '../pages/Dashboard/ManageClasses/ManageClass';
+import ManageClasses from '../pages/Dashboard/ManageClasses/ManageClasses';
 import PaymentHistory from '../pages/Dashboard/PaymentHistory/PaymentHistory';
 import MyClasses from '../pages/Dashboard/MyClasses/MyClasses';
 import UserProfile from '../pages/Dashboard/UserProfile/UserProfile';
 import MixedRoute from './MixedRoute';
+import { eachClassDetails } from '../api/classes';
 export const router = createBrowserRouter([
    {
       path: '/',
@@ -81,10 +80,10 @@ export const router = createBrowserRouter([
       path: '/dashboard',
       element: <SecretRoute><DashboardLayout /></SecretRoute>,
       children: [
-         {
-            index: true,
-            element: <MyBookings />
-         },
+         // {
+         //    index: true,
+         //    element: <MyBookings />
+         // },
          {
             path: 'user-home',
             element: <UserHome />
