@@ -1,40 +1,8 @@
 import { FaRegHandPointLeft } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import useAuth from '../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const ClassCard = ({ allClass }) => {
-   const navigate = useNavigate();
-   const { user } = useAuth();
 
-   const handleClassDetails = () => {
-      if (allClass.availableSeats === 0) {
-         Swal.fire({
-            position: 'center',
-            icon: 'warning',
-            title: 'This programme currently fulfills. Please try another.',
-            showConfirmButton: false,
-            timer: 1500,
-         });
-      }
-
-      else {
-         if (user.insertedId) {
-            Swal.fire({
-               position: 'center',
-               icon: 'warning',
-               title: 'You must be logged in first.',
-               showConfirmButton: false,
-               timer: 1500,
-            }).then(() => {
-               navigate('/authentication');
-            });
-         } else {
-            navigate(`/class-details/${allClass._id}`);
-         }
-      }
-
-   };
 
    return (
       <div className="group">
@@ -72,7 +40,6 @@ const ClassCard = ({ allClass }) => {
                      <button
                         className={`btn self-end btn-primary btn-sm capitalize bg-red-900 rounded-full border-0 hover:bg-red-700 cursor-pointer ${allClass.availableSeats === 0 ? 'hidden' : ''}`}
                         disabled={allClass.availableSeats === 0}
-                        onClick={handleClassDetails}
                      >
                         Class Details <FaRegHandPointLeft size={24} />
                      </button>
