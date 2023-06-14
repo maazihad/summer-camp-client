@@ -29,7 +29,7 @@ const AlbumSection = () => {
          <p className="text-center gamjaFlower text-red-800 font-bold mb-5 text-2xl">Explore the World Through Your Lens</p>
          <div className='grid pb-10 xl:grid-cols-5 md:grid-cols-3 lg:grid-cols-4 grid-cols-1 gap-4'>
             {
-               albums.map(album => <div
+               albums.slice(0, 20).map(album => <div
                   key={album._id}
                   className="card w-full group overflow-hidden bg-red-100 shadow-xl rounded-none">
                   <figure className='w-full lg:h-[300px]'>

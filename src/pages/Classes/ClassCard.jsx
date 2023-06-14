@@ -70,7 +70,7 @@ const ClassCard = ({ allClass }) => {
                <div className="mr-3 text-end mt-5">
                   <Link to={`/class-details/${allClass._id}`}>
                      <button
-                        className={`btn self-end btn-primary btn-sm capitalize bg-red-900 rounded-full border-0 hover:bg-red-700 cursor-pointer ${allClass.availableSeats === 0 ? 'disabled' : ''}`}
+                        className={`btn self-end btn-primary btn-sm capitalize bg-red-900 rounded-full border-0 hover:bg-red-700 cursor-pointer ${allClass.availableSeats === 0 ? 'hidden' : ''}`}
                         disabled={allClass.availableSeats === 0}
                         onClick={handleClassDetails}
                      >

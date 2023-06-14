@@ -33,7 +33,7 @@ const Instructors = () => {
          <Wrapper>
             <div className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
                {
-                  instructors.map((instructor) => <InstructorCard
+                  instructors.slice(0, 20).map((instructor) => <InstructorCard
                      key={instructor._id}
                      instructor={instructor}
 

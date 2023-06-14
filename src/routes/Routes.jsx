@@ -120,7 +120,7 @@ export const router = createBrowserRouter([
          },
          {
             path: 'manage-classes',
-            element: <AdminRoute><ManageClasses /></AdminRoute>
+            element: <MixedRoute><ManageClasses /></MixedRoute>
          },
 
          //================Instructor route===================

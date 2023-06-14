@@ -31,13 +31,13 @@ const InstructorMenu = () => {
 
          <li>
             <NavLink
-               to="/dashboard/my-class"
+               to="/dashboard/manage-classes"
                className={({ isActive, isPending }) =>
                   isPending
                      ? "pending" : isActive
                         ? "active" : ""
                }
-            > <FaWallet /> My Class</NavLink>
+            > <FaWallet /> My Classes</NavLink>
          </li>
       </>
    );

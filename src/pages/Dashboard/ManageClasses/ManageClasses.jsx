@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import ManageRow from "./ManageRow";
 import EmptyState from "../../../components/Shared/EmptyState";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const ManageClasses = () => {
 
@@ -19,6 +20,8 @@ const ManageClasses = () => {
          return res.data;
       }
    });
+
+
 
    const handleDelete = id => {
       Swal.fire({
@@ -47,6 +50,56 @@ const ManageClasses = () => {
       });
    };
    console.log(classes);
+
+   // const [status, setStatus] = useState('pending');
+   // const [isFeedbackModalOpen, setFeedbackModalOpen] = useState(false);
+   // const [feedback, setFeedback] = useState('');
+
+   // const handleApprove = () => {
+   //    setStatus('approved');
+   // };
+
+   // const handleDeny = () => {
+   //    setStatus('denied');
+   // };
+
+   // const handleFeedback = () => {
+   //    setFeedbackModalOpen(true);
+   // };
+
+   // const handleSubmitFeedback = () => {
+   //    // Handle submitting the feedback to the server or perform any necessary actions
+   //    setFeedbackModalOpen(false);
+   // };
+
+   const [status, setStatus] = useState('pending');
+   const [isDisabled, setIsDisabled] = useState(false);
+
+   const handleApprove = () => {
+      setStatus('approved');
+      setIsDisabled(true);
+   };
+
+   const handleDeny = () => {
+      setStatus('denied');
+      setIsDisabled(true);
+   };
+
+   const handleFeedback = () => {
+      setStatus('denied');
+      setIsDisabled(true);
+   };
+
+
+
+
+
+
+
+
+
+
+
    return (
       <>
          {
@@ -92,6 +145,12 @@ const ManageClasses = () => {
                                        scope='col'
                                        className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm capitalize font-bold'
                                     >
+                                       Available Seats
+                                    </th>
+                                    <th
+                                       scope='col'
+                                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm capitalize font-bold'
+                                    >
                                        Delete
                                     </th>
                                     <th
@@ -104,7 +163,13 @@ const ManageClasses = () => {
                                        scope='col'
                                        className='px-5 py-3 text-center bg-white  border-b border-gray-200 text-gray-800  text-sm capitalize font-bold'
                                     >
-                                       Status
+                                       status
+                                    </th>
+                                    <th
+                                       scope='col'
+                                       className='px-5 py-3 text-center bg-white  border-b border-gray-200 text-gray-800  text-sm capitalize font-bold'
+                                    >
+                                       Action
                                     </th>
                                  </tr>
                               </thead>
@@ -115,6 +180,12 @@ const ManageClasses = () => {
                                        classItem={classItem}
                                        refetch={refetch}
                                        handleDelete={handleDelete}
+                                       status={status}
+                                       handleApprove={handleApprove}
+                                       handleDeny={handleDeny}
+                                       handleFeedback={handleFeedback}
+                                       isDisabled={isDisabled}
+
                                     ></ManageRow>)
                                  }
                               </tbody>
