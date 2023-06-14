@@ -80,25 +80,13 @@ export const router = createBrowserRouter([
       path: '/dashboard',
       element: <SecretRoute><DashboardLayout /></SecretRoute>,
       children: [
-         // {
-         //    index: true,
-         //    element: <MyBookings />
-         // },
          {
-            path: 'user-home',
-            element: <UserHome />
-         },
-         {
-            path: 'admin-home',
-            element: <AdminHouse />
+            path: 'my-class',
+            element: <MyClasses />
          },
          {
             path: 'payment',
             element: <Payment />
-         },
-         {
-            path: 'my-class',
-            element: <MyClasses />
          },
          {
             path: 'payment-history',

@@ -11,13 +11,13 @@ const AllUsers = () => {
       return res.data;
    });
    const handleMakeAdmin = user => {
-      console.log(user);
+      // console.log(user);
       fetch(`${import.meta.env.VITE_API_URL}/users/admin/${user._id}`, {
          method: "PATCH",
       })
          .then(res => res.json())
          .then(data => {
-            console.log(data);
+            // console.log(data);
             if (data.modifiedCount > 0) {
                refetch();
                Swal.fire({
@@ -31,13 +31,13 @@ const AllUsers = () => {
          });
    };
    const handleMakeInstructor = user => {
-      console.log(user);
+      // console.log(user);
       fetch(`${import.meta.env.VITE_API_URL}/users/instructor/${user._id}`, {
          method: "PATCH",
       })
          .then(res => res.json())
          .then(data => {
-            console.log(data);
+            // console.log(data);
             if (data.modifiedCount > 0) {
                refetch();
                Swal.fire({

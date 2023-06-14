@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import UpdateModal from './UpdateModal';
+import useAdmin from '../../../hooks/useAdmin';
 
 const ManageRow = ({ handleDelete, classItem, refetch, status,
    handleApprove,
@@ -13,7 +14,7 @@ const ManageRow = ({ handleDelete, classItem, refetch, status,
    isDisabled }) => {
 
    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
+   const [isAdmin] = useAdmin();
    return (
       <>
          <tr>
@@ -73,123 +74,58 @@ const ManageRow = ({ handleDelete, classItem, refetch, status,
                   setIsEditModalOpen={setIsEditModalOpen}
                />
             </td>
-            {/* <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-            <button className="btn btn-xs capitalize">pending</button>
-         </td>
-         <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-            <div className="btn-group">
-               <button className="btn btn-xs capitalize">pending</button>
-               <button className="btn btn-xs capitalize">approved</button>
-               <button className="btn btn-xs capitalize">feedback</button>
-            </div>
-         </td> */}
 
-
-
-
-            {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-               {status === 'pending' && (
-                  <button className="btn btn-xs capitalize">pending</button>
-               )}
-               {status === 'approved' && (
-                  <button className="btn btn-xs capitalize" disabled>
-                     Approved
-                  </button>
-               )}
-               {status === 'denied' && (
-                  <button className="btn btn-xs capitalize" disabled>
-                     Denied
-                  </button>
-               )}
-               {status === 'denied' && (
-                  <button className="btn btn-xs capitalize" disabled>
-                     feedback
-                  </button>
-               )}
-            </td> */}
-
-
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-               {status === 'pending' && (
-                  <button className="btn btn-xs capitalize" disabled={isDisabled}>
-                     {isDisabled ? 'Approved' : 'Pending'}
-                  </button>
-               )}
-               {status === 'denied' && (
-                  <button className="btn btn-xs capitalize" disabled>
-                     Denied
-                  </button>
-               )}
-               {status === 'denied' && (
-                  <button className="btn btn-xs capitalize" disabled>
-                     Feedback
-                  </button>
-               )}
-            </td>
-
-
-
-            {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-               <div className="btn-group">
+            <>
+               {isAdmin && <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {status === 'pending' && (
-                     <button
-                        className="btn btn-xs capitalize"
-                        onClick={handleApprove}
-                     >
-                        Approve
+                     <button className="btn btn-xs capitalize" disabled={isDisabled}>
+                        {isDisabled ? 'Approved' : 'Pending'}
                      </button>
                   )}
-                  {status === 'pending' && (
-                     <button
-                        className="btn btn-xs capitalize"
-                        onClick={handleDeny}
-                     >
-                        Deny
+                  {status === 'denied' && (
+                     <button className="btn btn-xs capitalize" disabled>
+                        Denied
                      </button>
                   )}
-                  {status === 'pending' && (
-                     <button
-                        className="btn btn-xs capitalize"
-                        onClick={handleFeedback}
-                     >
+                  {status === 'denied' && (
+                     <button className="btn btn-xs capitalize" disabled>
                         Feedback
                      </button>
                   )}
-               </div>
-            </td> */}
+               </td>}
 
-
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-               <div className="btn-group">
-                  {status === 'pending' && (
-                     <button
-                        className="btn btn-xs capitalize"
-                        onClick={handleApprove}
-                        disabled={isDisabled}
-                     >
-                        Approve
-                     </button>
-                  )}
-                  {status === 'pending' && (
-                     <button
-                        className="btn btn-xs capitalize"
-                        onClick={handleDeny}
-                        disabled={isDisabled}
-                     >
-                        Deny
-                     </button>
-                  )}
-                  {status === 'pending' && (
-                     <button
-                        className="btn btn-xs capitalize"
-                        onClick={handleFeedback}
-                        disabled={isDisabled}
-                     >
-                        Feedback
-                     </button>
-                  )}
-               </div>
-            </td>
+               {isAdmin && <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <div className="btn-group">
+                     {status === 'pending' && (
+                        <button
+                           className="btn btn-xs capitalize"
+                           onClick={handleApprove}
+                           disabled={isDisabled}
+                        >
+                           Approve
+                        </button>
+                     )}
+                     {status === 'pending' && (
+                        <button
+                           className="btn btn-xs capitalize"
+                           onClick={handleDeny}
+                           disabled={isDisabled}
+                        >
+                           Deny
+                        </button>
+                     )}
+                     {status === 'pending' && (
+                        <button
+                           className="btn btn-xs capitalize"
+                           onClick={handleFeedback}
+                           disabled={isDisabled}
+                        >
+                           Feedback
+                        </button>
+                     )}
+                  </div>
+               </td>}
+            </>
 
 
 

@@ -5,23 +5,21 @@ import ManageRow from "./ManageRow";
 import EmptyState from "../../../components/Shared/EmptyState";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import useAdmin from "../../../hooks/useAdmin";
 
 const ManageClasses = () => {
-
+   const [isAdmin] = useAdmin();
    const { user, loading } = useAuth();
    const axiosSecure = useAxiosSecure();
-   // >>>>>react/tanStack query
    const { data: classes = [], refetch } = useQuery({
-      queryKey: ['rooms', user?.email],
+      queryKey: ['classes', user?.email],
       enabled: !loading,
       queryFn: async () => {
          const res = await axiosSecure.get(`/classes/${user?.email}`);
-         console.log(res.data);
+         // console.log(res.data);
          return res.data;
       }
    });
-
-
 
    const handleDelete = id => {
       Swal.fire({
@@ -38,7 +36,7 @@ const ManageClasses = () => {
                .then(res => {
                   if (res.data.deletedCount > 0) {
                      refetch();
-                     console.log("deleted response", res.data);
+                     // console.log("deleted response", res.data);
                      Swal.fire(
                         'Deleted!',
                         'Class has been deleted.',
@@ -49,28 +47,7 @@ const ManageClasses = () => {
          }
       });
    };
-   console.log(classes);
-
-   // const [status, setStatus] = useState('pending');
-   // const [isFeedbackModalOpen, setFeedbackModalOpen] = useState(false);
-   // const [feedback, setFeedback] = useState('');
-
-   // const handleApprove = () => {
-   //    setStatus('approved');
-   // };
-
-   // const handleDeny = () => {
-   //    setStatus('denied');
-   // };
-
-   // const handleFeedback = () => {
-   //    setFeedbackModalOpen(true);
-   // };
-
-   // const handleSubmitFeedback = () => {
-   //    // Handle submitting the feedback to the server or perform any necessary actions
-   //    setFeedbackModalOpen(false);
-   // };
+   // console.log(classes);
 
    const [status, setStatus] = useState('pending');
    const [isDisabled, setIsDisabled] = useState(false);
@@ -89,16 +66,6 @@ const ManageClasses = () => {
       setStatus('denied');
       setIsDisabled(true);
    };
-
-
-
-
-
-
-
-
-
-
 
    return (
       <>
@@ -159,18 +126,18 @@ const ManageClasses = () => {
                                     >
                                        Update
                                     </th>
-                                    <th
+                                    {isAdmin && <th
                                        scope='col'
                                        className='px-5 py-3 text-center bg-white  border-b border-gray-200 text-gray-800  text-sm capitalize font-bold'
                                     >
                                        status
-                                    </th>
-                                    <th
+                                    </th>}
+                                    {isAdmin && <th
                                        scope='col'
                                        className='px-5 py-3 text-center bg-white  border-b border-gray-200 text-gray-800  text-sm capitalize font-bold'
                                     >
                                        Action
-                                    </th>
+                                    </th>}
                                  </tr>
                               </thead>
                               <tbody>
@@ -206,126 +173,3 @@ const ManageClasses = () => {
 };
 
 export default ManageClasses;
-
-
-
-
-
-
-
-
-
-
-
-// import { Helmet } from "react-helmet-async";
-// import { FaTrashAlt } from "react-icons/fa";
-// import Swal from "sweetalert2";
-// import useAxiosSecure from "../../../hooks/useAxiosSecure";
-// import useClasses from "../../../hooks/useClasses";
-
-
-// const ManageClasses = () => {
-
-//    // TODO: এখানে যেহেতু এ্যারের মধ্যে তিনটা উপাদান আছে তাই তৃতীয়টাকে এক্সেস করতে গেলে মাঝখানেরটা খালি রেখে তৃতীয়টা লিখতে হবে।
-
-//    const [classes, refetch] = useClasses();
-//    const axiosSecure = useAxiosSecure();
-
-//    const handleDelete = (item) => {
-//       Swal.fire({
-//          title: 'Are you sure?',
-//          text: "You won't be able to revert this!",
-//          icon: 'warning',
-//          showCancelButton: true,
-//          confirmButtonColor: '#3085d6',
-//          cancelButtonColor: '#d33',
-//          confirmButtonText: 'Yes, delete it!'
-//       }).then((result) => {
-//          if (result.isConfirmed) {
-
-//             axiosSecure.delete(`/classes/${item._id}`)
-//                .then(res => {
-//                   if (res.data.deletedCount > 0) {
-//                      refetch();
-//                      console.log("deleted response", res.data);
-//                      Swal.fire(
-//                         'Deleted!',
-//                         'Item has been deleted.',
-//                         'success'
-//                      );
-//                   }
-//                });
-//          }
-//       });
-//    };
-
-
-//    // console.log(menu);
-//    return (
-//       <div>
-//          {/* Helmet */}
-//          <Helmet>
-//             <title>Raosu summer camp photography School || Manage Items</title>
-//          </Helmet>
-
-//          <div className="overflow-x-auto">
-//             <table className="table">
-//                {/* head */}
-//                <thead>
-//                   <tr>
-//                      <th>#</th>
-//                      <th>Class Image</th>
-//                      <th>Instructor Name</th>
-//                      <th>Price</th>
-//                      <th>Duration</th>
-//                      <th>Update</th>
-//                      <th>Delete</th>
-//                   </tr>
-//                </thead>
-//                <tbody>
-//                   {
-//                      classes.map((classItem, index) => <tr key={classItem._id}>
-//                         <th>
-//                            <label>
-//                               {index + 1}
-//                            </label>
-//                         </th>
-//                         <td>
-//                            <div className="flex items-center space-x-3">
-//                               <div className="avatar">
-//                                  <div className="mask mask-squircle w-12 h-12">
-//                                     <img src={classItem.picture} alt="Class Image" />
-//                                  </div>
-//                               </div>
-//                               <div>
-//                                  <div className="font-bold">{classItem.activityName}</div>
-//                               </div>
-//                            </div>
-//                         </td>
-//                         <td>
-//                            {classItem.InstructorName}
-//                         </td>
-//                         <td>${classItem.price}</td>
-//                         <td>{classItem.duration}</td>
-//                         <td>
-//                            <button className="btn btn-ghost btn-xs">update</button>
-//                         </td>
-//                         <td>
-//                            <button onClick={() => handleDelete(classItem)} className="btn btn-ghost bg-red-500 btn-md">
-//                               <FaTrashAlt className="text-lg text-white" />
-//                            </button>
-//                         </td>
-//                      </tr>
-//                      )
-//                   }
-
-
-//                </tbody>
-
-//             </table>
-//          </div>
-//       </div>
-//    );
-// };
-
-// export default ManageClasses;

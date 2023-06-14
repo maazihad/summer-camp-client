@@ -16,19 +16,19 @@ const UpdateModal = ({ setIsEditModalOpen, isOpen, refetch, classItem, id }) => 
       setLoading(true);
       updateClasses(updatedData, id)
          .then(data => {
-            console.log(data);
+            // console.log(data);
             toast.success('Class information updated');
             setLoading(false);
             refetch();
             setIsEditModalOpen(false);
          })
          .catch(err => {
-            console.log(err);
+            // console.log(err);
             setLoading(false);
          });
    };
 
-   console.log(classesData);
+   // console.log(classesData);
    return (
       <Transition appear show={isOpen} as={Fragment}>
          <Dialog

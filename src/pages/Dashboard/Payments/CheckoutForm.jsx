@@ -4,8 +4,11 @@ import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import "./CheckoutForm.css";
+import { useNavigate } from "react-router-dom";
+import moment from 'moment';
 
 const CheckoutForm = ({ price }) => {
+   const navigate = useNavigate();
    const stripe = useStripe();
    const elements = useElements();
    const { user } = useAuth();
@@ -19,7 +22,7 @@ const CheckoutForm = ({ price }) => {
       if (price > 0) {
          axiosSecure.post('/create-payment-intent', { price })
             .then(res => {
-               console.log(res.data.clientSecret);
+               // console.log(res.data.clientSecret);
                setClientSecret(res.data.clientSecret);
             });
       }
@@ -44,7 +47,7 @@ const CheckoutForm = ({ price }) => {
       });
 
       if (error) {
-         console.log('error', error);
+         // console.log('error', error);
          setCardError(error.message);
       }
       else {
@@ -71,7 +74,7 @@ const CheckoutForm = ({ price }) => {
          console.log(confirmError);
       }
 
-      console.log('payment intent', paymentIntent);
+      // console.log('payment intent', paymentIntent);
       setProcessing(false);
       if (paymentIntent.status === 'succeeded') {
          setTransactionId(paymentIntent.id);
@@ -80,11 +83,11 @@ const CheckoutForm = ({ price }) => {
             email: user?.email,
             transactionId: paymentIntent.id,
             totalPayment: price,
-            paymentDate: new Date(),
+            paymentDate: moment().format('MMMM Do YYYY, h:mm:ss a')
          };
          axiosSecure.post('/payments', payment)
             .then(res => {
-               console.log(res.data);
+               // console.log(res.data);
                if (res.data.result.insertedId) {
                   Swal.fire({
                      position: 'center',
@@ -93,6 +96,7 @@ const CheckoutForm = ({ price }) => {
                      showConfirmButton: false,
                      timer: 1500
                   });
+                  navigate('/dashboard/payment-history');
                }
             });
       }

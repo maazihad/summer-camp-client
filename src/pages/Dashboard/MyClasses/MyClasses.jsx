@@ -5,9 +5,6 @@ import ClassRow from "./ClassRow";
 
 const MyClasses = () => {
    const [classes, refetch] = useClasses();
-   const total = classes.reduce((sum, item) => item.price + sum, 0);
-   const totalPrice = parseFloat(total.toFixed(2));
-
    const handleDeleteClass = item => {
       Swal.fire({
          title: 'Are you sure?',
@@ -42,12 +39,7 @@ const MyClasses = () => {
             <title>Raosu summer camp photography School || My Cart</title>
          </Helmet>
 
-         <div className="flex justify-between gap-5 items-center my-5">
-            <h2 className="text-3xl font-bold text-red-800">Total Selected Class : {classes.length}</h2>
-            <h2 className="text-3xl font-bold text-red-800">Total Price : ${totalPrice}</h2>
-         </div>
-
-         <div className="overflow-x-auto w-full">
+         <div className="overflow-x-auto w-full py-10">
             <table className="table w-full">
                {/* head */}
                <thead>

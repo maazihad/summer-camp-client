@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const ClassRow = ({ classItem, index, handleDeleteClass }) => {
    const { picture, activityName, price } = classItem;
+
    return (
       <tr>
          <th>{index + 1}</th>
@@ -20,9 +21,9 @@ const ClassRow = ({ classItem, index, handleDeleteClass }) => {
             <div className="btn-group">
                <Link
                   to="/dashboard/payment">
-                  <button className="btn">PAY</button>
+                  <button className="btn btn-sm">PAY</button>
                </Link>
-               <button onClick={() => handleDeleteClass(classItem)} className="btn btn-ghost bg-red-500 btn-md">
+               <button onClick={() => handleDeleteClass(classItem)} className="btn btn-ghost bg-red-700 btn-sm">
                   <FaTrashAlt className="text-lg text-white" /></button>
             </div>
          </th>

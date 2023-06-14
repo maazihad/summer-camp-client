@@ -15,7 +15,7 @@ const ClassDetails = () => {
    const { user } = useAuth();
 
    const handleAddClass = classCartItem => {
-      console.log(classCartItem);
+      // console.log(classCartItem);
 
       if (user && user.email) {
 
@@ -81,11 +81,8 @@ const ClassDetails = () => {
                <div className="card-actions justify-end mt-7">
                   <button
                      onClick={() => handleAddClass(classInfo)}
-
-                     // disabled={user.email === classItem.email || roomData.booked}
                      className="btn lg:btn-wide btn-block bg-red-500 text-white hover:bg-red-700 font-bold capitalize border-0 lg:mr-10">Book This Class</button>
                </div>
-
 
                {/* ===============>>>>>>animation<<<<<<<<============ */}
                <div className="absolute top-5 w-12 h-12 right-5 animate-spin">

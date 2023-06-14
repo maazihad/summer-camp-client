@@ -10,11 +10,10 @@ const AddClass = () => {
    const { register, handleSubmit, reset, formState: { errors } } = useForm();
    const axiosSecure = useAxiosSecure();
    const onSubmit = async (data) => {
-      console.log(data);
-
+      // console.log(data);
       axiosSecure.post('/add-class', data)
          .then(data => {
-            console.log('after posting new menu item', data.data);
+            // console.log('after posting new menu item', data.data);
             if (data.data.insertedId) {
                // reset();
                Swal.fire({
@@ -27,9 +26,6 @@ const AddClass = () => {
             }
          });
    };
-
-
-
 
    return (
       <div className="container mx-auto my-10">

@@ -32,7 +32,7 @@ const SignUp = () => {
    const password = watch("password", "");
 
    const onSubmit = (data) => {
-      console.log(data);
+      // console.log(data);
       const formData = new FormData();
       formData.append("image", data.image[0]);
 
@@ -40,12 +40,12 @@ const SignUp = () => {
          .post(url, formData)
          .then((res) => {
             if (res.data.success) {
-               console.log(res.data.data.display_url);
+               // console.log(res.data.data.display_url);
                reset();
                const imgURL = res.data.data.display_url;
                createUser(data.email, data.password)
                   .then((result) => {
-                     console.log(result.user);
+                     // console.log(result.user);
                      updateUserProfile(data.name, imgURL)
                         .then(() => {
                            Swal.fire({
@@ -60,19 +60,19 @@ const SignUp = () => {
                         })
                         .catch((error) => {
                            toast(error.message);
-                           console.log(error.message);
+                           // console.log(error.message);
                            setLoading(false);
                         });
                   })
                   .catch((error) => {
                      toast(error.message);
-                     console.log(error.message);
+                     // console.log(error.message);
                      setLoading(false);
                   });
             }
          })
          .catch((error) => {
-            console.log(error);
+            // console.log(error);
             toast(error.message);
          });
    };

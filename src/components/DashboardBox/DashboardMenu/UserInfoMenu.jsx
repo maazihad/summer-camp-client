@@ -38,14 +38,14 @@ const UserInfoMenu = () => {
                {
                   isAdmin ? (
                      <>
-                        <Link to="/dashboard/admin-home"> Admin Dashboard</Link>
+                        <Link to="/dashboard"> Admin Dashboard</Link>
                      </>
                   ) : isInstructor ? (
                      <>
-                        <Link to="/dashboard/instructor-home"> Instructor Dashboard</Link>
+                        <Link to="/dashboard"> Instructor Dashboard</Link>
                      </>
                   ) : (
-                     <Link to="/dashboard/user-home"> User Dashboard</Link>
+                     <Link to="/dashboard"> User Dashboard</Link>
                   )
                }
             </span>

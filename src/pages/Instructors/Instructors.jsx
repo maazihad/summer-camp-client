@@ -12,7 +12,7 @@ const Instructors = () => {
    const getInstructors = async () => {
       try {
          const res = await axiosSecure.get('/instructors');
-         console.log(res.data);
+         // console.log(res.data);
          return res.data;
       } catch (error) {
          console.error(error);

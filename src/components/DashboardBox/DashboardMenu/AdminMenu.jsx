@@ -1,21 +1,9 @@
-import { AiFillHome, } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom';
 import { FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 
 const AdminMenu = () => {
    return (
       <>
-         <li>
-            <NavLink
-               to="/dashboard/admin-home"
-               className={({ isActive, isPending }) =>
-                  isPending
-                     ? "pending" : isActive
-                        ? "active" : ""
-               }
-            > <AiFillHome /> Admin Home</NavLink>
-         </li>
-
          <li>
             <NavLink
                to="/dashboard/add-class"
